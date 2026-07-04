@@ -2010,23 +2010,88 @@ function restoreFromCloud() {
 
 // ===== 记事本 =====
 const NOTEPAD_KEY = 'nav_notepad_content';
+const NOTEPAD_GIST_KEY = 'nav_notepad_gist_id';
+
+function saveNotepadToGist() {
+  const token = localStorage.getItem('nav_gist_token');
+  const gistId = localStorage.getItem(NOTEPAD_GIST_KEY);
+  if (!token || !gistId) return;
+  const text = document.getElementById('notepadContent').value;
+  const filename = 'notepad.md';
+  const files = {};
+  files[filename] = { content: text };
+  fetch('https://api.github.com/gists/' + gistId, {
+    method: 'PATCH',
+    headers: {'Authorization': 'token ' + token, 'Content-Type': 'application/json'},
+    body: JSON.stringify({ files })
+  }).catch(function(){});
+}
+
+function loadNotepadFromGist(callback) {
+  const token = localStorage.getItem('nav_gist_token');
+  const gistId = localStorage.getItem(NOTEPAD_GIST_KEY);
+  if (!token || !gistId) { if(callback) callback(); return; }
+  fetch('https://api.github.com/gists/' + gistId, {
+    headers: {'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json'}
+  }).then(function(r){ return r.json(); }).then(function(gist){
+    const files = gist.files || {};
+    const first = Object.values(files)[0];
+    if (first && first.content) {
+      localStorage.setItem(NOTEPAD_KEY, first.content);
+    }
+    if(callback) callback();
+  }).catch(function(){ if(callback) callback(); });
+}
+
+function setupNotepadGist() {
+  const token = prompt('请输入 GitHub Token（需要 gist 权限，用于同步记事本）：');
+  if (!token) return;
+  localStorage.setItem('nav_gist_token', token);
+  // 检查是否已有 Gist
+  const existingId = localStorage.getItem(NOTEPAD_GIST_KEY);
+  if (existingId) {
+    showToast('已配置 Gist 同步', 'success');
+    return;
+  }
+  // 创建新 Gist
+  const text = document.getElementById('notepadContent').value || '# 记事本';
+  fetch('https://api.github.com/gists', {
+    method: 'POST',
+    headers: {'Authorization': 'token ' + token, 'Content-Type': 'application/json'},
+    body: JSON.stringify({ description: '导航页记事本', public: false, files: { 'notepad.md': { content: text } } })
+  }).then(function(r){ return r.json(); }).then(function(result){
+    if (result.id) {
+      localStorage.setItem(NOTEPAD_GIST_KEY, result.id);
+      showToast('✅ 记事本同步已开启', 'success');
+    } else {
+      showToast('创建 Gist 失败：' + (result.message || ''), 'error');
+    }
+  }).catch(function(err){ showToast('网络错误', 'error'); });
+}
 
 function openNotepad() {
   if (!isAuthenticated) { checkAuth(function(){ _openNotepad(); }); } else { _openNotepad(); }
 }
 function _openNotepad() {
-  document.getElementById('notepadContent').value = localStorage.getItem(NOTEPAD_KEY) || '';
-  updateNotepadWordCount();
-  document.getElementById('notepadOverlay').classList.add('show');
-  document.getElementById('notepadContent').focus();
+  // 尝试从 Gist 加载最新内容
+  loadNotepadFromGist(function() {
+    document.getElementById('notepadContent').value = localStorage.getItem(NOTEPAD_KEY) || '';
+    updateNotepadWordCount();
+    document.getElementById('notepadOverlay').classList.add('show');
+    document.getElementById('notepadContent').focus();
+  });
 }
 function closeNotepad(ev) {
   if (ev && ev.target !== document.getElementById('notepadOverlay')) return;
   saveNotepad();
   document.getElementById('notepadOverlay').classList.remove('show');
 }
-function saveNotepad() { localStorage.setItem(NOTEPAD_KEY, document.getElementById('notepadContent').value); updateNotepadWordCount(); showToast('已保存','success'); }
+function saveNotepad() { localStorage.setItem(NOTEPAD_KEY, document.getElementById('notepadContent').value); updateNotepadWordCount(); saveNotepadToGist(); showToast('已保存','success'); }
 function updateNotepadWordCount() { document.getElementById('notepadWordCount').textContent = document.getElementById('notepadContent').value.length + ' 字'; }
+function setupNotepadSync() {
+  if (!isAuthenticated) { checkAuth(function(){ setupNotepadGist(); }); } else { setupNotepadGist(); }
+}
+
 function exportNotepad() {
   const blob = new Blob([document.getElementById('notepadContent').value], {type: 'text/plain;charset=utf-8'});
   const a = document.createElement('a');
@@ -2129,6 +2194,7 @@ document.getElementById('pageTitle').ondblclick = function(e) {
       <h2 style="font-size:1.1rem;color:var(--text);font-weight:650;margin:0;">📝 记事本</h2>
       <div style="display:flex;gap:6px;">
         <button class="btn-icon" onclick="saveNotepad()" title="保存" style="width:auto;border-radius:10px;padding:6px 14px;font-size:0.75rem;gap:4px;">💾 保存</button>
+        <button class="btn-icon" onclick="setupNotepadSync()" title="开启云同步" style="width:auto;border-radius:10px;padding:6px 14px;font-size:0.75rem;gap:4px;">☁️ 同步</button>
         <button class="btn-icon" onclick="exportNotepad()" title="导出" style="width:auto;border-radius:10px;padding:6px 14px;font-size:0.75rem;gap:4px;">📤</button>
         <button class="btn-icon" onclick="importNotepad()" title="导入" style="width:auto;border-radius:10px;padding:6px 14px;font-size:0.75rem;gap:4px;">📥</button>
       </div>
