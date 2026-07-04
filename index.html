@@ -16,6 +16,9 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>刘海泉的导航站</title>
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>我的导航</title>
 <style>
   :root {
     --bg: #f5f5f7;
@@ -57,9 +60,6 @@
     --ctx-bg: rgba(44,44,46,0.95);
     --trash-bg: rgba(127,29,29,0.7);
   }
-  .dark-mode body, body.dark-mode {
-    background-image: radial-gradient(ellipse 80% 60% at 0% 10%, rgba(41,151,255,0.03) 0%, transparent 60%);
-  }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -70,61 +70,30 @@
     padding: 48px 24px 80px;
     color: var(--text);
     background-image:
-      radial-gradient(ellipse 80% 60% at 0% 10%, rgba(139,111,230,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 100% 90%, rgba(96,165,250,0.06) 0%, transparent 60%);
-  }
 
-  .container { max-width: 960px; margin: 0 auto; }
+  .container { max-width: 720px; margin: 0 auto; }
 
   /* ---- Header ---- */
   .header {
     text-align: center;
     margin-bottom: 40px;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .header-top {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    width: 100%;
   }
   .header h1 {
-    font-size: 2.2rem;
+    font-size: 2.6rem;
     font-weight: 750;
     letter-spacing: -0.02em;
     background: linear-gradient(135deg, #f97373 0%, #c084fc 45%, #60a5fa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin: 0;
-    line-height: 1.2;
+    margin-bottom: 6px;
   }
-  .header .subtitle {
+  .header p {
     color: var(--text-secondary);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 450;
     letter-spacing: 0.02em;
-    margin-top: 4px;
-  }
-  .header .clock {
-    font-size: 0.78rem;
-    color: var(--text-secondary);
-    font-weight: 450;
-    letter-spacing: 0.04em;
-    background: var(--card-bg);
-    backdrop-filter: blur(12px);
-    padding: 6px 16px;
-    border-radius: 20px;
-    border: 1px solid var(--card-border);
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    margin-top: 10px;
-    font-variant-numeric: tabular-nums;
   }
   .header-actions {
     position: absolute;
@@ -155,23 +124,39 @@
     box-shadow: var(--shadow-hover);
     transform: scale(1.06);
   }
+  /* 一键获取图标按钮 */
+  .btn-fetch-icons {
+    background: linear-gradient(135deg, var(--accent), #4a5ae0);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 12px;
+    border: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-fetch-icons:hover { opacity: 0.88; }
 
   /* ---- Search ---- */
   .search-bar {
-    max-width: 540px;
-    margin: 0 auto 32px;
+    max-width: 620px;
+    margin: 0 auto 36px;
     display: flex;
-    border-radius: 40px;
+    border-radius: 60px;
     overflow: hidden;
     background: var(--card-bg);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
     box-shadow: var(--shadow);
-    border: 1.5px solid var(--card-border);
+    border: 1.5px solid transparent;
     transition: all var(--transition);
   }
   .search-bar:focus-within {
     border-color: var(--accent);
-    box-shadow: 0 2px 12px var(--accent-glow);
+    box-shadow: 0 4px 24px var(--accent-glow);
   }
   .search-engine-btn {
     display: flex;
@@ -193,24 +178,25 @@
   .search-engine-btn .arrow { font-size: 0.6rem; margin-left: 2px; opacity: 0.6; }
   .search-bar input {
     flex: 1;
-    padding: 12px 18px;
+    padding: 14px 22px;
     border: none;
     background: transparent;
     color: var(--text);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     outline: none;
   }
   .search-bar input::placeholder { color: #bbb8d0; }
   .search-bar button {
-    padding: 12px 22px;
+    padding: 14px 26px;
     border: none;
-    background: transparent;
-    color: var(--text-secondary);
-    font-size: 1rem;
+    background: linear-gradient(135deg, var(--accent), #7c5cdb);
+    color: #fff;
+    font-size: 0.95rem;
     cursor: pointer;
+    font-weight: 600;
     transition: opacity 0.2s;
   }
-  .search-bar button:hover { opacity: 0.7; }
+  .search-bar button:hover { opacity: 0.88; }
 
   /* ---- Quick Links ---- */
   .quick-links {
@@ -224,23 +210,23 @@
   .quick-link {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border-radius: 30px;
+    gap: 7px;
+    padding: 10px 18px;
+    border-radius: 40px;
     background: var(--card-bg);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
     border: 1.5px solid var(--card-border);
     color: var(--text);
     text-decoration: none;
-    font-size: 0.83rem;
-    font-weight: 490;
+    font-size: 0.85rem;
+    font-weight: 510;
     transition: all var(--transition);
     box-shadow: var(--shadow);
   }
   .quick-link:hover {
-    background: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.92);
     border-color: var(--accent);
-    transform: translateY(-1px);
+    transform: translateY(-2px) scale(1.02);
     box-shadow: var(--shadow-hover);
   }
   .quick-link .icon { font-size: 1.05rem; line-height: 1; }
@@ -253,15 +239,24 @@
   .section-header {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-    padding: 0 2px;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-left: 4px;
+  }
+  .section-header::before {
+    content: '';
+    width: 4px;
+    height: 18px;
+    border-radius: 4px;
+    background: linear-gradient(180deg, var(--accent), #a78bfa);
+    flex-shrink: 0;
   }
   .section-title {
     font-size: 0.78rem;
-    font-weight: 550;
+    font-weight: 650;
     color: var(--text-secondary);
-    letter-spacing: 0.02em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
   .btn-add-link {
     font-size: 0.7rem;
@@ -283,8 +278,8 @@
   /* ---- Grid ---- */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
   }
 
   /* ---- Card ---- */
@@ -292,44 +287,75 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    padding: 18px 8px 10px;
+    gap: 8px;
+    padding: 20px 10px 14px;
     border-radius: var(--radius);
     background: var(--card-bg);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
     border: 1.5px solid var(--card-border);
     color: var(--text);
     text-decoration: none;
     text-align: center;
     transition: all var(--transition);
     box-shadow: var(--shadow);
-    cursor: pointer;
+    cursor: grab;
     position: relative;
+    overflow: hidden;
   }
+  .nav-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    opacity: 0;
+    transition: opacity var(--transition);
+    background: linear-gradient(135deg, rgba(139,111,230,0.04), rgba(139,111,230,0.01));
+  }
+  .nav-card:hover::before { opacity: 1; }
   .nav-card:hover {
     border-color: var(--accent);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-hover);
-    background: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.88);
   }
-  .nav-card:active { transform: scale(0.96); }
+  .nav-card:active { cursor: grabbing; }
+  .nav-card.dragging {
+    opacity: 0.35;
+    transform: scale(0.95);
+  }
 
+  /* ---- 拖拽把手 ---- */
   .nav-card .drag-handle {
-    position: absolute;
-    top: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.6rem;
-    color: #ccc;
-    cursor: grab;
-    opacity: 0;
-    transition: opacity 0.2s;
-    line-height: 1;
-    user-select: none;
-    letter-spacing: 2px;
+    position: absolute; top: 2px; left: 50%; transform: translateX(-50%);
+    font-size: 0.6rem; color: #ccc; cursor: grab; opacity: 0;
+    transition: opacity 0.2s; line-height: 1; user-select: none; letter-spacing: 2px;
   }
   .nav-card:hover .drag-handle { opacity: 0.6; cursor: grab; }
   .nav-card .drag-handle:hover { opacity: 1; color: var(--accent); }
+
+  /* ---- 网络状态指示灯 ---- */
+  .nav-card .status-dot {
+    position: absolute; top: 4px; right: 6px;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #999; opacity: 0.3;
+    transition: background 0.3s, opacity 0.3s;
+  }
+  .nav-card:hover .status-dot { opacity: 0.7; }
+  .status-dot.online { background: #34c759; }
+  .status-dot.slow { background: #ff9f0a; }
+  .status-dot.offline { background: #ff3b30; }
+
+  /* ---- 分类折叠 & 加密 ---- */
+  .section-header { cursor: pointer; user-select: none; }
+  .section.collapsed .grid { display: none; }
+  .section.locked .grid { filter: blur(8px); pointer-events: none; user-select: none; position: relative; }
+  .section.locked .grid::after {
+    content: '🔒 点击标题输入密码';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-size: 0.85rem; color: var(--text-secondary);
+    background: var(--card-bg); backdrop-filter: blur(12px);
+    padding: 10px 20px; border-radius: 12px; z-index: 10; white-space: nowrap;
+  }
 
   .nav-card .emoji { font-size: 1.7rem; line-height: 1; }
   .nav-card .label {
@@ -341,15 +367,15 @@
 
   /* Section-specific card hover accents */
   .section-movies .nav-card:hover { border-color: #e879b0; --accent: #e879b0; }
-  .section-movies .nav-card:hover { box-shadow: 0 4px 32px rgba(232,121,176,0.12); }
+  .section-movies .nav-card:hover { box-shadow: 0 8px 32px rgba(232,121,176,0.12); }
   .section-selfhost .nav-card:hover { border-color: #7bc96f; }
-  .section-selfhost .nav-card:hover { box-shadow: 0 4px 32px rgba(123,201,111,0.12); }
+  .section-selfhost .nav-card:hover { box-shadow: 0 8px 32px rgba(123,201,111,0.12); }
   .section-tools .nav-card:hover { border-color: #f0a84b; }
-  .section-tools .nav-card:hover { box-shadow: 0 4px 32px rgba(240,168,75,0.12); }
+  .section-tools .nav-card:hover { box-shadow: 0 8px 32px rgba(240,168,75,0.12); }
   .section-dev .nav-card:hover { border-color: #5b9cf5; }
-  .section-dev .nav-card:hover { box-shadow: 0 4px 32px rgba(91,156,245,0.12); }
+  .section-dev .nav-card:hover { box-shadow: 0 8px 32px rgba(91,156,245,0.12); }
   .section-social .nav-card:hover { border-color: #f97373; }
-  .section-social .nav-card:hover { box-shadow: 0 4px 32px rgba(249,115,115,0.12); }
+  .section-social .nav-card:hover { box-shadow: 0 8px 32px rgba(249,115,115,0.12); }
 
   /* ---- Context Menu ---- */
   .ctx-menu {
@@ -359,7 +385,7 @@
     background: rgba(255,255,255,0.92);
     backdrop-filter: blur(20px);
     border-radius: 14px;
-    box-shadow: 0 4px 40px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.03);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.03);
     padding: 6px 0;
     min-width: 190px;
     animation: ctxIn 0.13s ease;
@@ -449,7 +475,7 @@
     background: rgba(248,113,113,0.92);
     color: #fff;
     border-color: #ef4444;
-    box-shadow: 0 4px 32px rgba(220,38,38,0.20);
+    box-shadow: 0 8px 32px rgba(220,38,38,0.20);
   }
 
   /* ---- Modal ---- */
@@ -468,7 +494,7 @@
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
   .modal {
-    background: var(--modal-bg);
+    background: #fff;
     border-radius: 22px;
     padding: 32px 36px;
     width: 90%;
@@ -480,37 +506,6 @@
     from { transform: scale(0.94); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
   }
-
-  /* ---- 卡片渐入动画 ---- */
-  .nav-card {
-    animation: cardIn 0.4s ease both;
-  }
-  @keyframes cardIn {
-    from { transform: translateY(16px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-
-  /* ---- 分类折叠 & 加密 ---- */
-  .section-header { cursor: pointer; user-select: none; }
-  .section.collapsed .grid { display: none; }
-  .section.locked .grid { filter: blur(8px); pointer-events: none; user-select: none; position: relative; }
-  .section.locked .grid::after {
-    content: '🔒 点击标题输入密码解锁';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    background: var(--card-bg);
-    backdrop-filter: blur(12px);
-    padding: 10px 20px;
-    border-radius: 12px;
-    z-index: 10;
-    white-space: nowrap;
-  }
-  .section:not(.locked) .section-header::after { content: ''; }
-
   .modal h2 { font-size: 1.1rem; margin-bottom: 24px; color: var(--text); font-weight: 650; }
   .modal label {
     display: block;
@@ -528,12 +523,12 @@
     outline: none;
     transition: all 0.2s;
     margin-bottom: 16px;
-    background: var(--input-bg);
+    background: #f8f7fc;
     color: var(--text);
   }
   .modal input:focus, .modal select:focus {
     border-color: var(--accent);
-    background: var(--modal-bg);
+    background: #fff;
     box-shadow: 0 0 0 3px var(--accent-glow);
   }
   .modal-actions {
@@ -561,7 +556,7 @@
 
   /* ---- Settings Modal ---- */
   .settings-modal {
-    background: var(--modal-bg);
+    background: #fff;
     border-radius: 22px;
     width: 90%;
     max-width: 600px;
@@ -622,11 +617,11 @@
     gap: 12px;
     padding: 12px 16px;
     border-radius: 14px;
-    background: var(--settings-bg);
+    background: #f8f7fc;
     margin-bottom: 8px;
     transition: background 0.15s;
   }
-  .settings-item:hover { background: var(--settings-hover); }
+  .settings-item:hover { background: #f2eff8; }
   .settings-item .s-name {
     flex: 1;
     font-size: 0.85rem;
@@ -700,11 +695,11 @@
     border-radius: 14px;
     font-size: 0.9rem;
     outline: none;
-    background: var(--input-bg);
+    background: #f8f7fc;
     color: var(--text);
     transition: all 0.2s;
   }
-  .settings-field input:focus { border-color: var(--accent); background: var(--modal-bg); box-shadow: 0 0 0 3px var(--accent-glow); }
+  .settings-field input:focus { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px var(--accent-glow); }
   .section-actions { margin-bottom: 14px; }
   .section-actions button { font-weight: 500; }
 
@@ -725,11 +720,9 @@
 <div class="container">
 
   <div class="header">
-    <div class="header-top">
-      <h1 id="pageTitle">🌈 我的导航</h1>
-    </div>
-    <p class="subtitle" id="pageSubtitle">常用网址 · 一键直达</p>
-    <div class="clock" id="clockDisplay">🕐 --:--:--</div>
+    <h1 id="pageTitle">🌈 我的导航</h1>
+    <p id="pageSubtitle">常用网址 · 一键直达</p>
+    <div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;font-variant-numeric:tabular-nums;" id="clockDisplay"></div>
     <div class="header-actions">
       <button class="btn-icon" id="themeBtn" onclick="toggleTheme()" title="切换主题">☀️</button>
       <button class="btn-icon" onclick="openNotepad()" title="记事本">📝</button>
@@ -740,13 +733,13 @@
   </div>
 
   <form class="search-bar" id="searchForm" target="_blank" style="position:relative;">
-    <select id="searchEngineSelect" style="border:none;background:transparent;padding:12px 8px 12px 16px;font-size:0.82rem;font-weight:500;color:var(--text-secondary);outline:none;cursor:pointer;border-right:1.5px solid var(--border-light);flex-shrink:0;appearance:none;-webkit-appearance:none;">
+    <select id="searchEngineSelect" style="border:none;background:transparent;padding:14px 8px 14px 18px;font-size:0.85rem;font-weight:550;color:var(--text-secondary);outline:none;cursor:pointer;border-right:1.5px solid #eeeaf5;flex-shrink:0;appearance:none;-webkit-appearance:none;">
       <option value="google">Google</option>
       <option value="bing">Bing</option>
       <option value="yandex">Yandex</option>
       <option value="baidu">百度</option>
     </select>
-    <input type="text" name="q" id="searchInput" placeholder="搜索一下...  (g=Google, b=百度, bi=Bing, y=Yandex)" autofocus>
+    <input type="text" name="q" id="searchInput" placeholder="" autofocus>
     <button type="submit">🔍</button>
   </form>
 
@@ -761,8 +754,16 @@
     <h2 id="modalTitle">添加网址</h2>
     <label for="modalSection">分类</label>
     <select id="modalSection"></select>
-    <label for="modalEmoji">图标 (Emoji)</label>
-    <input id="modalEmoji" type="text" placeholder="如：🌐 🔧 🎮" maxlength="6">
+    <label for="modalEmoji">图标</label>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:16px;">
+      <input id="modalEmoji" type="text" placeholder="Emoji 如 🌐" maxlength="6" style="flex:1;padding:11px 16px;border:1.5px solid var(--border-light);border-radius:14px;font-size:0.9rem;outline:none;background:var(--input-bg);color:var(--text);">
+      <button class="btn-icon" onclick="document.getElementById('svgUpload').click()" title="上传SVG图标" style="width:auto;border-radius:10px;padding:8px 14px;font-size:0.75rem;gap:4px;flex-shrink:0;">🖼️ SVG</button>
+      <input type="file" id="svgUpload" accept=".svg" style="display:none" onchange="handleSvgUpload(event)">
+    </div>
+    <div id="modalIconPreview" style="display:none;margin-bottom:10px;padding:8px 12px;border-radius:10px;background:var(--settings-bg);font-size:0.8rem;color:var(--text-secondary);align-items:center;gap:8px;">
+      <span>当前图标：</span><span id="modalIconPreviewContent"></span>
+      <button class="s-btn" onclick="clearIconPreview()" style="font-size:0.7rem;margin-left:auto;">✕ 清除</button>
+    </div>
     <label for="modalName">名称</label>
     <input id="modalName" type="text" placeholder="给个名字">
     <label for="modalUrl">网址</label>
@@ -784,7 +785,6 @@
       <button class="settings-tab active" onclick="switchSettingsTab('general',this)">📐 基本</button>
       <button class="settings-tab" onclick="switchSettingsTab('sections',this)">📂 分类</button>
       <button class="settings-tab" onclick="switchSettingsTab('quick',this)">⚡ 快速链接</button>
-      <button class="settings-tab" onclick="switchSettingsTab('cloud',this)">☁️ 云端</button>
     </div>
     <div class="settings-body">
       <div id="panelGeneral" class="settings-panel active">
@@ -799,13 +799,12 @@
         <div style="margin-top:20px;padding-top:16px;border-top:1.5px solid var(--divider);">
           <label style="display:block;font-size:0.78rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;">🔑 修改密码</label>
           <div style="display:flex;flex-direction:column;gap:8px;">
-            <input type="password" id="oldPwdInput" placeholder="当前密码" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-light);border-radius:12px;font-size:0.85rem;outline:none;background:var(--input-bg);color:var(--text);transition:border-color 0.2s;">
-            <input type="password" id="newPwdInput" placeholder="新密码" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-light);border-radius:12px;font-size:0.85rem;outline:none;background:var(--input-bg);color:var(--text);transition:border-color 0.2s;">
-            <input type="password" id="confirmPwdInput" placeholder="确认新密码" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-light);border-radius:12px;font-size:0.85rem;outline:none;background:var(--input-bg);color:var(--text);transition:border-color 0.2s;">
+            <input type="password" id="oldPwdInput" placeholder="当前密码" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-light);border-radius:12px;font-size:0.85rem;outline:none;background:var(--input-bg);color:var(--text);">
+            <input type="password" id="newPwdInput" placeholder="新密码" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-light);border-radius:12px;font-size:0.85rem;outline:none;background:var(--input-bg);color:var(--text);">
+            <input type="password" id="confirmPwdInput" placeholder="确认新密码" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-light);border-radius:12px;font-size:0.85rem;outline:none;background:var(--input-bg);color:var(--text);">
             <div id="pwdChangeMsg" style="font-size:0.8rem;min-height:20px;color:#ef4444;"></div>
             <button class="btn-icon" onclick="changePasswordInline()" style="width:auto;border-radius:12px;padding:8px 20px;gap:5px;font-size:0.82rem;background:var(--accent);color:#fff;border:none;font-weight:600;">确认修改</button>
           </div>
-          <div style="margin-top:8px;font-size:0.75rem;color:var(--text-secondary);">密码保存在浏览器，清除数据会丢失</div>
         </div>
       </div>
       <div id="panelSections" class="settings-panel">
@@ -820,71 +819,10 @@
         </div>
         <div id="settingsQuickLinks"></div>
       </div>
-      <div id="panelCloud" class="settings-panel">
-        <div class="settings-field">
-          <label>🔑 API Token</label>
-          <input id="settingsWorkerPwd" type="password" placeholder="Cloudflare API Token" onchange="saveCloudConfig()">
-        </div>
-        <div class="settings-field">
-          <label>🆔 Account ID</label>
-          <input id="settingsAccountId" type="text" placeholder="53f8bc..." onchange="saveCloudConfig()">
-        </div>
-        <div class="settings-field">
-          <label>📁 KV Namespace ID</label>
-          <input id="settingsKvId" type="text" placeholder="bd780c..." onchange="saveCloudConfig()">
-        </div>
-        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
-          <button class="btn-icon" onclick="syncFromCloud()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">⬇️ 从云端拉取</button>
-          <button class="btn-icon" onclick="syncToCloud()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">⬆️ 推送至云端</button>
-        </div>
-        <div id="cloudStatus" style="margin-top:10px;font-size:0.8rem;color:var(--text-secondary);min-height:20px;"></div>
-        <div style="margin-top:16px;padding-top:16px;border-top:1.5px solid var(--divider);">
-          <div style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:8px;">⚠️ 配置保存在浏览器，所有设备需填入相同参数</div>
-          <div style="font-size:0.78rem;color:var(--text-secondary);">API Token 需要有 Workers KV 的 Edit 权限</div>
-        </div>
-      </div>
     </div>
     <div class="settings-foot">
       <button class="btn-cancel" onclick="closeSettings()">取消</button>
       <button class="btn-confirm" onclick="closeSettings();saveAll()">保存</button>
-    </div>
-  </div>
-</div>
-
-<!-- ===== 记事本弹窗 ===== -->
-<div id="notepadOverlay" class="modal-overlay" onclick="closeNotepad(event)">
-  <div class="modal" onclick="event.stopPropagation()" style="max-width:600px;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-      <h2 style="font-size:1.1rem;color:var(--text);font-weight:650;margin:0;">📝 记事本</h2>
-      <div style="display:flex;gap:6px;">
-        <button class="btn-icon" onclick="saveNotepad()" title="保存" style="width:auto;border-radius:10px;padding:6px 14px;font-size:0.75rem;gap:4px;">💾 保存</button>
-        <button class="btn-icon" onclick="exportNotepad()" title="导出" style="width:auto;border-radius:10px;padding:6px 14px;font-size:0.75rem;gap:4px;">📤</button>
-        <button class="btn-icon" onclick="importNotepad()" title="导入" style="width:auto;border-radius:10px;padding:6px 14px;font-size:0.75rem;gap:4px;">📥</button>
-      </div>
-    </div>
-    <textarea id="notepadContent" style="width:100%;height:50vh;min-height:300px;padding:16px;border:1.5px solid var(--border-light);border-radius:14px;font-size:0.9rem;line-height:1.7;outline:none;background:var(--input-bg);color:var(--text);resize:vertical;font-family:inherit;transition:border-color 0.2s;" placeholder="在这里写笔记..."></textarea>
-    <div class="modal-actions" style="margin-top:12px;">
-      <div style="flex:1;font-size:0.75rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;">
-        <span id="notepadWordCount">0 字</span>
-        <span>·</span>
-        <span>自动保存到浏览器</span>
-      </div>
-      <button class="btn-cancel" onclick="closeNotepad()">关闭</button>
-    </div>
-  </div>
-</div>
-
-<!-- ===== 密码输入弹窗 ===== -->
-<div id="pwdOverlay" class="modal-overlay" onclick="closePwdModal(event)">
-  <div class="modal" onclick="event.stopPropagation()" style="max-width:360px;text-align:center;">
-    <h2 id="pwdTitle" style="margin-bottom:16px;">🔒 请输入管理员密码</h2>
-    <input type="password" id="pwdInput" placeholder="输入密码"
-      style="width:100%;padding:12px 16px;border:2px solid var(--border-light);border-radius:14px;font-size:1rem;outline:none;background:var(--input-bg);color:var(--text);text-align:center;transition:border-color 0.2s;"
-      onkeydown="if(event.key==='Enter')submitPwd()" oninput="this.style.borderColor='var(--border-light)'">
-    <div id="pwdError" style="font-size:0.8rem;color:#ef4444;margin-top:8px;min-height:20px;opacity:0;transition:opacity 0.2s;">密码错误</div>
-    <div class="modal-actions" style="justify-content:center;margin-top:16px;">
-      <button class="btn-cancel" onclick="closePwdModal()">取消</button>
-      <button class="btn-confirm" onclick="submitPwd()">确定</button>
     </div>
   </div>
 </div>
@@ -895,184 +833,8 @@
 <!-- ===== 回收区 ===== -->
 <div id="trashZone" class="trash-zone">🗑️ 拖到这里删除</div>
 
-<!-- ===== 隐藏添加面板（双击空白区弹出） ===== -->
-<div id="quickAddOverlay" class="modal-overlay" onclick="closeQuickAdd(event)">
-  <div class="modal" onclick="event.stopPropagation()" style="max-width:380px;">
-    <h2 style="margin-bottom:16px;">➕ 快速添加</h2>
-    <label for="quickAddName">名称</label>
-    <input id="quickAddName" type="text" placeholder="网站名称" onkeydown="if(event.key==='Enter')document.getElementById('quickAddUrl').focus()">
-    <label for="quickAddUrl">网址</label>
-    <input id="quickAddUrl" type="url" placeholder="https://..." onkeydown="if(event.key==='Enter')confirmQuickAdd()">
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeQuickAdd()">取消</button>
-      <button class="btn-confirm" onclick="confirmQuickAdd()">添加</button>
-    </div>
-  </div>
-</div>
-
 <script>
-try {
-
-const STORAGE_KEY = 'my_nav_data';
-
-// ===== Cloudflare KV 云同步（直接 API）=====
-let CLOUD_AUTO_SYNC = false;
-
-function saveCloudConfig() {
-  const url = document.getElementById('settingsWorkerUrl').value.trim();
-  const pwd = document.getElementById('settingsWorkerPwd').value.trim();
-  localStorage.setItem('cf_worker_url', url);
-  localStorage.setItem('cf_worker_pwd', pwd);
-  localStorage.setItem('cf_account_id', document.getElementById('settingsAccountId').value.trim());
-  localStorage.setItem('cf_kv_id', document.getElementById('settingsKvId').value.trim());
-  const st = document.getElementById('cloudStatus');
-  if (st) st.textContent = (url && pwd) ? '✅ 已保存' : '⚠️ 请填写完整';
-}
-
-function getCloudConfig() {
-  return {
-    token: localStorage.getItem('cf_worker_pwd') || '',
-    accountId: localStorage.getItem('cf_account_id') || '',
-    kvId: localStorage.getItem('cf_kv_id') || ''
-  };
-}
-
-const CF_KV_KEY = 'nav_bookmarks';
-function setCloudStatus(msg, isError) {
-  const st = document.getElementById('cloudStatus');
-  if (st) st.textContent = msg;
-  if (isError) console.error(msg);
-}
-
-function cfApi(path, method, body) {
-  const cfg = getCloudConfig();
-  if (!cfg.token || !cfg.accountId || !cfg.kvId) {
-    throw new Error('请先配置云端参数');
-  }
-  const url = 'https://api.cloudflare.com/client/v4/accounts/' + cfg.accountId + '/storage/kv/namespaces/' + cfg.kvId + path;
-  return fetch(url, {
-    method: method || 'GET',
-    headers: {
-      'Authorization': 'Bearer ' + cfg.token,
-      'Content-Type': 'application/json'
-    },
-    body: body ? JSON.stringify(body) : undefined
-  }).then(function(r) { return r.json(); });
-}
-
-function syncFromCloud() {
-  setCloudStatus('⏳ 正在拉取...');
-  cfApi('/values/' + CF_KV_KEY)
-    .then(function(resp) {
-      if (!resp.success) throw new Error(resp.errors && resp.errors[0] ? resp.errors[0].message : 'API错误');
-      var cloudData = JSON.parse(resp.result);
-      if (!cloudData || typeof cloudData !== 'object') throw new Error('无效数据');
-      if (!cloudData.sections) cloudData.sections = [];
-      if (!cloudData.quickLinks) cloudData.quickLinks = [];
-      data = cloudData;
-      saveData();
-      render();
-      setCloudStatus('✅ 从云端拉取成功 (' + countLinks(data) + ' 个链接)');
-    })
-    .catch(function(err) {
-      setCloudStatus('❌ 拉取失败: ' + err.message, true);
-    });
-}
-
-function syncToCloud() {
-  setCloudStatus('⏳ 正在推送...');
-  cfApi('/values/' + CF_KV_KEY, 'PUT', JSON.stringify(data))
-    .then(function(resp) {
-      if (!resp.success) throw new Error(resp.errors && resp.errors[0] ? resp.errors[0].message : 'API错误');
-      setCloudStatus('✅ 推送成功！共 ' + countLinks(data) + ' 个链接已同步');
-    })
-    .catch(function(err) {
-      setCloudStatus('❌ 推送失败: ' + err.message, true);
-    });
-}
-
-function countLinks(d) {
-  let n = (d.quickLinks || []).length;
-  (d.sections || []).forEach(function(s) { n += (s.links || []).length; });
-  return n;
-}
-
-function autoSyncFromCloud() {
-  const cfg = getCloudConfig();
-  if (!cfg.token || !cfg.accountId || !cfg.kvId) return;
-  CLOUD_AUTO_SYNC = true;
-  cfApi('/values/' + CF_KV_KEY)
-    .then(function(resp) {
-      if (!resp.success) throw new Error();
-      var cloudData = JSON.parse(resp.result);
-      if (!cloudData || typeof cloudData !== 'object') return;
-      if (!cloudData.sections) cloudData.sections = [];
-      if (!cloudData.quickLinks) cloudData.quickLinks = [];
-      data = cloudData;
-      saveData();
-      render();
-    })
-    .catch(function() {});
-}
-
-let _syncTimer = null;
-function autoSyncToCloud() {
-  if (_syncTimer) clearTimeout(_syncTimer);
-  _syncTimer = setTimeout(function() {
-    const cfg = getCloudConfig();
-    if (!cfg.token || !cfg.accountId || !cfg.kvId) return;
-    cfApi('/values/' + CF_KV_KEY, 'PUT', JSON.stringify(data)).catch(function() {});
-  }, 1200);
-}
-
-const _origSaveData = saveData;
-saveData = function() {
-  _origSaveData();
-  if (CLOUD_AUTO_SYNC && localStorage.getItem('cf_worker_pwd')) {
-    autoSyncToCloud();
-  }
-};
-
-// ===== Toast 提示 =====
-function showToast(msg, duration) {
-  duration = duration || 2500;
-  const t = document.createElement('div');
-  t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.78);color:#fff;padding:10px 24px;border-radius:14px;font-size:0.85rem;z-index:9999;backdrop-filter:blur(8px);animation:popIn 0.2s ease;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.15);';
-  t.textContent = msg;
-  document.body.appendChild(t);
-  setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity 0.3s'; setTimeout(() => t.remove(), 300); }, duration);
-}
-
-// ===== 隐藏添加面板 =====
-function openQuickAdd() {
-  document.getElementById('quickAddName').value = '';
-  document.getElementById('quickAddUrl').value = '';
-  document.getElementById('quickAddOverlay').classList.add('show');
-  setTimeout(() => document.getElementById('quickAddName').focus(), 100);
-}
-
-function closeQuickAdd(ev) {
-  if (ev && ev.target !== document.getElementById('quickAddOverlay')) return;
-  document.getElementById('quickAddOverlay').classList.remove('show');
-}
-
-function confirmQuickAdd() {
-  let name = document.getElementById('quickAddName').value.trim();
-  let url = document.getElementById('quickAddUrl').value.trim();
-  if (!name || !url) { showToast('⚠️ 名称和网址不能为空'); return; }
-  if (!url.startsWith('http://') && !url.startsWith('https://')) url = 'https://' + url;
-  data.quickLinks.push({ icon: 'svg', name, url });
-  saveData();
-  render();
-  closeQuickAdd();
-  showToast('✅ 已添加: ' + name);
-}
-
-// 双击页面空白区弹出快速添加
-document.addEventListener('dblclick', function(e) {
-  if (e.target.closest('a') || e.target.closest('button') || e.target.closest('input') || e.target.closest('select') || e.target.closest('textarea') || e.target.closest('.modal') || e.target.closest('.settings-modal')) return;
-  openQuickAdd();
-});
+const STORAGE_KEY = 'my_nav_data_v2';
 
 const DEFAULT_DATA = {
   title: '🌈 我的导航',
@@ -1115,6 +877,7 @@ const DEFAULT_DATA = {
         { emoji: '🛠️', name: 'KuKuTool', url: 'https://dy.kukutool.com' },
         { emoji: '🧰', name: '刘明野工具箱', url: 'https://tool.liumingye.cn' },
         { emoji: '☁️', name: '良心云', url: 'https://xn--9kqz23b19z.com/#/dashboard' },
+        { emoji: '☁️', name: '嗨云', url: 'https://cloud.hysoon.com/account/logon?fromUrl=/fkdevice/index' },
         { emoji: '🏠', name: '青禾导航', url: 'https://www.qinghedaohang.com' }
       ]
     },
@@ -1127,6 +890,17 @@ const DEFAULT_DATA = {
         { emoji: '🧠', name: 'DeepSeek平台', url: 'https://platform.deepseek.com/api_keys' },
         { emoji: '📊', name: 'DeepSeek用量', url: 'https://platform.deepseek.com/usage' },
         { emoji: '🎵', name: 'Apple Music', url: 'https://music.apple.com/cn/library/songs' }
+      ]
+    },
+    {
+      id: 'pn',
+      name: '🔞 PN',
+      cssClass: 'section-pn',
+      links: [
+        { emoji: '🎬', name: 'GGJAV', url: 'https://ggjav.com/member/login?redirect=/main/my_list' },
+        { emoji: '🔞', name: '91CG', url: 'https://91cg8.com/' },
+        { emoji: '📺', name: 'PornHub', url: 'https://www.pornhub.com' },
+        { emoji: '🐦', name: 'X', url: 'https://x.com' }
       ]
     },
     {
@@ -1172,8 +946,90 @@ function loadData() {
   return JSON.parse(JSON.stringify(DEFAULT_DATA));
 }
 
+// 自动云同步配置
+const CLOUD_CONFIG_KEY = 'nav_cloud_config';
+
+function getCloudConfig() {
+  try { return JSON.parse(localStorage.getItem(CLOUD_CONFIG_KEY)) || {}; } catch(e) { return {}; }
+}
+
+function saveCloudConfig(config) {
+  localStorage.setItem(CLOUD_CONFIG_KEY, JSON.stringify(config));
+}
+
+let cloudSyncTimer = null;
+let cloudSyncPending = false;
+
+function syncDataToCloud() {
+  const config = getCloudConfig();
+  if (!config.token || !config.gistId) return;
+  if (cloudSyncTimer) clearTimeout(cloudSyncTimer);
+  cloudSyncTimer = setTimeout(function() {
+    const json = JSON.stringify(data, null, 2);
+    const files = {};
+    files['nav-data.json'] = { content: json };
+    fetch('https://api.github.com/gists/' + config.gistId, {
+      method: 'PATCH',
+      headers: {'Authorization': 'token ' + config.token, 'Content-Type': 'application/json'},
+      body: JSON.stringify({ files })
+    }).catch(function(){});
+    cloudSyncTimer = null;
+  }, 2000); // 防抖2秒，避免频繁保存时重复请求
+}
+
+function restoreFromCloudAuto(callback) {
+  const config = getCloudConfig();
+  if (!config.token || !config.gistId) { if(callback) callback(); return; }
+  fetch('https://api.github.com/gists/' + config.gistId, {
+    headers: {'Authorization': 'token ' + config.token, 'Accept': 'application/vnd.github.v3+json'}
+  }).then(function(r){ return r.json(); }).then(function(gist){
+    const files = gist.files || {};
+    const first = Object.values(files)[0];
+    if (first && first.content) {
+      try {
+        const imported = JSON.parse(first.content);
+        if (imported.sections && imported.quickLinks) {
+          data = imported;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+      } catch(e) {}
+    }
+    if(callback) callback();
+  }).catch(function(){ if(callback) callback(); });
+}
+
+function setupCloudSync() {
+  const token = prompt('请输入 GitHub Token（需要 gist 权限）：');
+  if (!token) return;
+  const config = getCloudConfig();
+  config.token = token;
+  
+  if (config.gistId) {
+    saveCloudConfig(config);
+    showToast('✅ 云同步已配置', 'success');
+    return;
+  }
+  
+  // 创建新 Gist
+  const json = JSON.stringify(data, null, 2);
+  fetch('https://api.github.com/gists', {
+    method: 'POST',
+    headers: {'Authorization': 'token ' + token, 'Content-Type': 'application/json'},
+    body: JSON.stringify({ description: '导航数据云同步', public: false, files: { 'nav-data.json': { content: json } } })
+  }).then(function(r){ return r.json(); }).then(function(result){
+    if (result.id) {
+      config.gistId = result.id;
+      saveCloudConfig(config);
+      showToast('✅ 云同步已开启', 'success');
+    } else {
+      showToast('创建失败：' + (result.message || ''), 'error');
+    }
+  }).catch(function(){ showToast('网络错误', 'error'); });
+}
+
 function saveData() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  syncDataToCloud();
 }
 
 function renderSVGIcon(name) {
@@ -1218,11 +1074,11 @@ function render() {
   const container = document.getElementById('sectionContainer');
   container.innerHTML = data.sections.map((s, si) => {
     const linksHtml = s.links.map((l, li) =>
-      `<a class="nav-card" href="${l.url}" target="_blank"
-          data-type="card" data-si="${si}" data-li="${li}">
-        <span class="drag-handle">⋮⋮</span>
+      `<a class="nav-card" href="${l.url}" target="_blank" draggable="true"
+          data-type="card" data-si="${si}" data-li="${li}"
+          ondragstart="onDragStart(event)" ondragend="onDragEnd(event)">
+        <span class="emoji">${l.emojiType === 'svg' ? '<img src="' + l.emoji + '" style="width:26px;height:26px;border-radius:4px;">' : l.emoji}</span>
         <span class="status-dot" data-url="${l.url}"></span>
-        <span class="emoji">${l.emoji}</span>
         <span class="label">${l.name}</span>
       </a>`
     ).join('');
@@ -1241,14 +1097,49 @@ function render() {
 
 // ===== 添加 / 编辑 =====
 let modalMode = null;
+let modalSvgData = null;
+
+function handleSvgUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    modalSvgData = ev.target.result;
+    document.getElementById('modalIconPreview').style.display = 'flex';
+    document.getElementById('modalIconPreviewContent').innerHTML = `<img src="${modalSvgData}" style="height:24px;width:24px;">`;
+    document.getElementById('modalEmoji').value = '__svg__';
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearIconPreview() {
+  modalSvgData = null;
+  document.getElementById('modalIconPreview').style.display = 'none';
+  document.getElementById('modalEmoji').value = '';
+  document.getElementById('svgUpload').value = '';
+}
+
+function getIconFromModal() {
+  const emoji = document.getElementById('modalEmoji').value.trim();
+  if (emoji === '__svg__' && modalSvgData) return modalSvgData;
+  return emoji || '🔗';
+}
+
+function getIconType(val) {
+  if (val && val.startsWith('data:image/svg+xml')) return 'svgdata';
+  return 'emoji';
+}
 
 function showAddModal(target) {
   modalMode = null;
+  modalSvgData = null;
+  document.getElementById('modalIconPreview').style.display = 'none';
   modalMode = target;
   document.getElementById('modalTitle').textContent = '添加网址';
   document.getElementById('modalEmoji').value = '';
   document.getElementById('modalName').value = '';
   document.getElementById('modalUrl').value = '';
+  document.getElementById('svgUpload').value = '';
 
   const sel = document.getElementById('modalSection');
   sel.innerHTML = '<option value="__quick__">快速链接栏</option>' +
@@ -1289,11 +1180,13 @@ function confirmModal() {
   }
 
   const sectionId = document.getElementById('modalSection').value;
+  const newItem = { emoji, name, url };
+  if (getIconType(emoji) === 'svgdata') newItem.emojiType = 'svg';
   if (sectionId === '__quick__') {
     data.quickLinks.push({ icon: 'svg', name, url });
   } else {
     const s = data.sections.find(x => x.id === sectionId);
-    if (s) s.links.push({ emoji, name, url });
+    if (s) s.links.push(newItem);
   }
   saveData();
   render();
@@ -1308,11 +1201,6 @@ function switchSettingsTab(panelId, btn) {
   document.getElementById('panel' + panelId.charAt(0).toUpperCase() + panelId.slice(1)).classList.add('active');
   if (panelId === 'sections') renderSettingsSections();
   if (panelId === 'quick') renderSettingsQuick();
-  if (panelId === 'cloud') {
-    document.getElementById('settingsWorkerPwd').value = localStorage.getItem('cf_worker_pwd') || '';
-    document.getElementById('settingsAccountId').value = localStorage.getItem('cf_account_id') || '';
-    document.getElementById('settingsKvId').value = localStorage.getItem('cf_kv_id') || '';
-  }
 }
 
 function openSettings() {
@@ -1335,24 +1223,22 @@ function closeSettings(ev) {
 function renderSettingsSections() {
   const list = document.getElementById('settingsSectionList');
   list.innerHTML = data.sections.map((s, i) => `
-    <div class="settings-item" style="flex-wrap:wrap;">
-      <div style="display:flex;flex-direction:column;gap:2px;flex-shrink:0;">
-        <button class="s-btn" onclick="moveSection(${i},-1)" style="font-size:0.7rem;padding:2px 6px;line-height:1;" ${i===0?'disabled':''}>▲</button>
-        <button class="s-btn" onclick="moveSection(${i},1)" style="font-size:0.7rem;padding:2px 6px;line-height:1;" ${i===data.sections.length-1?'disabled':''}>▼</button>
-      </div>
+    <div class="settings-item">
+      <button class="s-btn" onclick="moveSection(${i},-1)" style="font-size:0.75rem;padding:2px 8px;" ${i===0?'disabled':''}>▲</button>
+      <button class="s-btn" onclick="moveSection(${i},1)" style="font-size:0.75rem;padding:2px 8px;" ${i===data.sections.length-1?'disabled':''}>▼</button>
       <span class="s-name">${s.name}</span>
-      <input type="text" value="${s.cssClass || ''}" placeholder="class" style="width:70px;padding:4px 8px;border:1px solid var(--border-light);border-radius:8px;font-size:0.75rem;background:var(--input-bg);color:var(--text);" onchange="data.sections[${i}].cssClass=this.value">
-      <input type="password" value="${s.password || ''}" placeholder="密码" style="width:70px;padding:4px 8px;border:1px solid var(--border-light);border-radius:8px;font-size:0.75rem;background:var(--input-bg);color:var(--text);" onchange="data.sections[${i}].password=this.value||undefined;saveData();" title="设密码后点标题需管理员密码">
+      <input type="text" value="${s.cssClass || ''}" placeholder="class" style="width:90px;padding:4px 8px;border:1px solid #e6e3ef;border-radius:8px;font-size:0.75rem;" onchange="data.sections[${i}].cssClass=this.value">
       <button class="s-btn" onclick="renameSection(${i})">✏️</button>
       <button class="s-btn del" onclick="deleteSection(${i})">🗑️</button>
     </div>
   `).join('');
-  // Add data management buttons
   list.innerHTML += `
     <div style="margin-top:16px;padding-top:16px;border-top:1.5px solid var(--divider);">
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
         <button class="btn-icon" onclick="exportData()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">📤 导出数据</button>
         <button class="btn-icon" onclick="importData()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">📥 导入数据</button>
+        <button class="btn-icon" onclick="fetchAllIcons()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;background:linear-gradient(135deg,var(--accent),#4a5ae0);color:#fff;border:none;">🔄 获取图标</button>
+        <button class="btn-icon" onclick="setupCloudSync()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;background:linear-gradient(135deg,#34c759,#28a745);color:#fff;border:none;">🔄 自动同步</button>
         <button class="btn-icon" onclick="backupToCloud()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">☁️ 云端备份</button>
         <button class="btn-icon" onclick="restoreFromCloud()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">⬇️ 云端恢复</button>
       </div>
@@ -1365,9 +1251,7 @@ function moveSection(idx, dir) {
   if (newIdx < 0 || newIdx >= data.sections.length) return;
   const item = data.sections.splice(idx, 1)[0];
   data.sections.splice(newIdx, 0, item);
-  saveData();
-  render();
-  renderSettingsSections();
+  saveData(); render(); renderSettingsSections();
 }
 
 function renderSettingsQuick() {
@@ -1381,6 +1265,18 @@ function renderSettingsQuick() {
       <button class="s-btn del" onclick="deleteQuickLink(${i})">🗑️</button>
     </div>
   `).join('');
+  list.innerHTML += `
+    <div style="margin-top:16px;padding-top:16px;border-top:1.5px solid var(--divider);">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn-icon" onclick="exportData()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">📤 导出数据</button>
+        <button class="btn-icon" onclick="importData()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">📥 导入数据</button>
+        <button class="btn-icon" onclick="fetchAllIcons()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;background:linear-gradient(135deg,var(--accent),#4a5ae0);color:#fff;border:none;">🔄 获取图标</button>
+        <button class="btn-icon" onclick="setupCloudSync()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;background:linear-gradient(135deg,#34c759,#28a745);color:#fff;border:none;">🔄 自动同步</button>
+        <button class="btn-icon" onclick="backupToCloud()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">☁️ 云端备份</button>
+        <button class="btn-icon" onclick="restoreFromCloud()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">⬇️ 云端恢复</button>
+      </div>
+    </div>
+  `;
 }
 
 function renameSection(idx) {
@@ -1418,97 +1314,18 @@ function deleteQuickLink(idx) {
   renderSettingsQuick();
 }
 
-const ADMIN_PASSWORD_KEY = 'nav_admin_password';
-let ADMIN_PASSWORD = localStorage.getItem(ADMIN_PASSWORD_KEY) || '8587';
-let isAuthenticated = false;
 
-let pwdCallback = null;
 
 function checkAuth(fn) {
   if (isAuthenticated) { fn(); return; }
-  pwdCallback = fn;
-  document.getElementById('pwdTitle').textContent = '🔒 请输入管理员密码';
-  document.getElementById('pwdInput').value = '';
-  document.getElementById('pwdError').style.opacity = '0';
-  document.getElementById('pwdInput').style.borderColor = 'var(--border-light)';
-  document.getElementById('pwdOverlay').classList.add('show');
-  setTimeout(() => document.getElementById('pwdInput').focus(), 100);
-}
-
-function submitPwd() {
-  const pwd = document.getElementById('pwdInput').value;
+  const pwd = prompt('请输入管理员密码：');
   if (pwd === ADMIN_PASSWORD) {
     isAuthenticated = true;
-    localStorage.setItem('nav_auth_session', '1');
-    const btn = document.getElementById('loginBtn');
-    if (btn) { btn.textContent = '🔓'; btn.title = '已登录'; }
-    document.getElementById('pwdOverlay').classList.remove('show');
-    if (pwdCallback) { pwdCallback(); pwdCallback = null; }
+    fn();
   } else {
-    document.getElementById('pwdInput').style.borderColor = '#ef4444';
-    document.getElementById('pwdError').style.opacity = '1';
-    document.getElementById('pwdInput').value = '';
-    document.getElementById('pwdInput').focus();
+    alert('密码错误');
   }
 }
-
-function closePwdModal(ev) {
-  if (ev && ev.target !== document.getElementById('pwdOverlay')) return;
-  document.getElementById('pwdOverlay').classList.remove('show');
-  document.getElementById('pwdError').style.opacity = '0';
-  document.getElementById('pwdInput').style.borderColor = 'var(--border-light)';
-  pwdCallback = null;
-}
-
-function login() {
-  checkAuth(function() {
-    // 登录成功，不弹窗
-  });
-}
-
-function logout() {
-  isAuthenticated = false;
-  localStorage.removeItem('nav_auth_session');
-  document.getElementById('loginBtn').textContent = '🔒';
-  document.getElementById('loginBtn').title = '点击登录';
-}
-
-function changePasswordInline() {
-  const old = document.getElementById('oldPwdInput').value;
-  const new1 = document.getElementById('newPwdInput').value;
-  const new2 = document.getElementById('confirmPwdInput').value;
-  const msg = document.getElementById('pwdChangeMsg');
-
-  if (old !== ADMIN_PASSWORD) {
-    msg.textContent = '当前密码错误';
-    document.getElementById('oldPwdInput').style.borderColor = '#ef4444';
-    return;
-  }
-  if (!new1) {
-    msg.textContent = '请输入新密码';
-    document.getElementById('newPwdInput').style.borderColor = '#ef4444';
-    return;
-  }
-  if (new1 !== new2) {
-    msg.textContent = '两次输入不一致';
-    document.getElementById('confirmPwdInput').style.borderColor = '#ef4444';
-    return;
-  }
-  ADMIN_PASSWORD = new1;
-  localStorage.setItem(ADMIN_PASSWORD_KEY, new1);
-  msg.textContent = '';
-  msg.style.color = '#10b981';
-  msg.textContent = '✅ 密码修改成功！';
-  document.getElementById('oldPwdInput').value = '';
-  document.getElementById('newPwdInput').value = '';
-  document.getElementById('confirmPwdInput').value = '';
-  document.getElementById('oldPwdInput').style.borderColor = '';
-  document.getElementById('newPwdInput').style.borderColor = '';
-  document.getElementById('confirmPwdInput').style.borderColor = '';
-  setTimeout(() => { msg.textContent = ''; msg.style.color = '#ef4444'; }, 3000);
-}
-
-
 
 function saveAll() {
   saveData();
@@ -1525,8 +1342,8 @@ const SEARCH_URLS = {
 };
 const sel = document.getElementById('searchEngineSelect');
 const form = document.getElementById('searchForm');
-const input = document.getElementById('searchInput');
 
+// 恢复上次选择
 try {
   const saved = localStorage.getItem('search_engine');
   if (saved && SEARCH_URLS[saved]) sel.value = saved;
@@ -1537,13 +1354,11 @@ form.action = SEARCH_URLS[sel.value];
 sel.onchange = function() {
   form.action = SEARCH_URLS[sel.value];
   try { localStorage.setItem('search_engine', sel.value); } catch(e) {}
-  input.focus();
+  document.getElementById('searchInput').focus();
 };
 
 form.onsubmit = function() {
-  const val = input.value.trim();
-
-  // 搜索快捷指令
+  const val = document.getElementById('searchInput').value.trim();
   const quickMap = {
     'g ': 'google', 'gg ': 'google',
     'b ': 'baidu', 'bd ': 'baidu',
@@ -1552,224 +1367,40 @@ form.onsubmit = function() {
   };
   for (const [prefix, engine] of Object.entries(quickMap)) {
     if (val.startsWith(prefix)) {
-      input.value = val.slice(prefix.length);
+      document.getElementById('searchInput').value = val.slice(prefix.length);
       form.action = SEARCH_URLS[engine];
       sel.value = engine;
       try { localStorage.setItem('search_engine', engine); } catch(e) {}
-      setTimeout(() => { input.value = ''; }, 100);
+      setTimeout(() => { document.getElementById('searchInput').value = ''; }, 100);
       return true;
     }
   }
-
-  setTimeout(() => { input.value = ''; }, 100);
+  setTimeout(() => { document.getElementById('searchInput').value = ''; }, 100);
 };
 })();
 
 // ===== 快捷键 =====
 document.addEventListener('keydown', function(e) {
-  // Ctrl+K 或 / 聚焦搜索框
   if ((e.ctrlKey && e.key === 'k') || (!e.ctrlKey && !e.metaKey && e.key === '/' && !e.target.closest('input,select,textarea'))) {
     e.preventDefault();
     document.getElementById('searchInput').focus();
   }
-  // Escape 关闭右键菜单和下拉和密码弹窗
   if (e.key === 'Escape') {
     closeCtxMenu();
-    closePwdModal();
-    const menu = document.getElementById('searchEngineMenu');
-    if (menu) menu.classList.remove('show');
   }
 });
-
-// ===== 分类折叠 & 加密 =====
-// 在 render 之后绑定事件
-document.addEventListener('click', function(e) {
-  const header = e.target.closest('.section-header');
-  if (!header) return;
-  const section = header.closest('.section');
-  if (!section) return;
-  const si = parseInt(section.dataset.si);
-  const secData = data.sections[si];
-  if (!secData) return;
-
-  // 如果分组有密码且已锁定 — 已登录直接解锁
-  if (secData.password && section.classList.contains('locked')) {
-    if (isAuthenticated) {
-      section.classList.remove('locked');
-      section.classList.toggle('collapsed');
-    } else {
-      checkAuth(function() {
-        section.classList.remove('locked');
-        section.classList.toggle('collapsed');
-      });
-    }
-    return;
-  }
-
-  // 如果有密码但已解锁 — 再次点击折叠
-  if (secData.password && !section.classList.contains('locked')) {
-    section.classList.toggle('collapsed');
-    return;
-  }
-
-  // 无密码 — 直接折叠/展开
-  section.classList.toggle('collapsed');
-});
-
-// ===== 数据导出/导入 =====
-function exportData() {
-  const json = JSON.stringify(data, null, 2);
-  const blob = new Blob([json], {type: 'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = '导航数据备份_' + new Date().toISOString().slice(0,10) + '.json';
-  a.click();
-  URL.revokeObjectURL(a.href);
-}
-
-function importData() {
-  const input2 = document.createElement('input');
-  input2.type = 'file';
-  input2.accept = '.json';
-  input2.onchange = function(ev) {
-    const file = ev.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function(ev2) {
-      try {
-        const imported = JSON.parse(ev2.target.result);
-        if (!imported.sections || !imported.quickLinks) {
-          alert('文件格式不正确');
-          return;
-        }
-        if (confirm('确定导入？当前数据将被覆盖！')) {
-          data = imported;
-          saveData();
-          render();
-          alert('导入成功！');
-        }
-      } catch(err) {
-        alert('文件解析失败：' + err.message);
-      }
-    };
-    reader.readAsText(file);
-  };
-  input2.click();
-}
-
-// ===== 云端备份（GitHub Gist）=====
-function backupToCloud() { syncToCloud(); return;
-    if (!token2) return;
-    const json = JSON.stringify(data, null, 2);
-    const filename = 'nav-data-' + new Date().toISOString().slice(0,10) + '.json';
-
-    // 先查有没有已有的 gist
-    fetch('https://api.github.com/gists', {
-      headers: {'Authorization': 'token ' + token2, 'Accept': 'application/vnd.github.v3+json'}
-    })
-    .then(r => r.json())
-    .then(gists => {
-      const existing = Array.isArray(gists) ? gists.find(g => {
-        const files = g.files || {};
-        return Object.keys(files).some(fn => fn.startsWith('nav-data-'));
-      }) : null;
-
-      const files = {};
-      files[filename] = { content: json };
-
-      if (existing) {
-        return fetch(existing.url, {
-          method: 'PATCH',
-          headers: {'Authorization': 'token ' + token2, 'Content-Type': 'application/json'},
-          body: JSON.stringify({ files })
-        }).then(r => r.json());
-      } else {
-        return fetch('https://api.github.com/gists', {
-          method: 'POST',
-          headers: {'Authorization': 'token ' + token2, 'Content-Type': 'application/json'},
-          body: JSON.stringify({ description: '导航数据备份', public: false, files })
-        }).then(r => r.json());
-      }
-    })
-    .then(result => {
-      if (result.html_url) {
-        alert('备份成功！Gist 地址：' + result.html_url);
-        localStorage.setItem('nav_gist_url', result.html_url);
-      } else {
-        alert('备份失败：' + (result.message || '未知错误'));
-      }
-    })
-    .catch(err => alert('网络错误：' + err.message));
-  });
-}
-
-function restoreFromCloud() { syncFromCloud(); return;
-    if (!token2) return;
-    const gistUrl = localStorage.getItem('nav_gist_url');
-    if (!gistUrl) {
-      alert('没有找到备份记录，请手动输入 Gist ID');
-      return;
-    }
-    const gistId = gistUrl.split('/').pop();
-    fetch('https://api.github.com/gists/' + gistId, {
-      headers: {'Authorization': 'token ' + token2, 'Accept': 'application/vnd.github.v3+json'}
-    })
-    .then(r => r.json())
-    .then(gist => {
-      const files = gist.files || {};
-      const firstFile = Object.values(files)[0];
-      if (!firstFile) { alert('Gist 中没有数据'); return; }
-      const imported = JSON.parse(firstFile.content);
-      if (confirm('确定从云端恢复？当前数据将被覆盖！')) {
-        data = imported;
-        saveData();
-        render();
-        alert('恢复成功！');
-      }
-    })
-    .catch(err => alert('恢复失败：' + err.message));
-  });
-}
-
-// 修改 openSettings 加入导出导入和云备份按钮
-openSettings = function() {
-  checkAuth(function() {
-    document.getElementById('settingsTitle').value = data.title;
-    document.getElementById('settingsSubtitle').value = data.subtitle;
-
-    // Reset to first tab
-    document.querySelectorAll('.settings-tab').forEach((t, i) => t.classList.toggle('active', i === 0));
-    document.querySelectorAll('.settings-panel').forEach((p, i) => p.classList.toggle('active', i === 0));
-    renderSettingsSections();
-    renderSettingsQuick();
-    // Load cloud config
-    var wToken = localStorage.getItem('cf_worker_pwd') || '';
-    var wAccount = localStorage.getItem('cf_account_id') || '';
-    var wKv = localStorage.getItem('cf_kv_id') || '';
-    document.getElementById('settingsWorkerPwd').value = wToken;
-    document.getElementById('settingsAccountId').value = wAccount;
-    document.getElementById('settingsKvId').value = wKv;
-    var st = document.getElementById('cloudStatus');
-    if (st) st.textContent = (wToken && wAccount && wKv) ? '✅ 已配置' : '⚠️ 配置不完整';
-    document.getElementById('settingsOverlay').classList.add('show');
-  });
-}
 
 // ===== 右键菜单 =====
 let ctxTarget = null;
 
 document.addEventListener('contextmenu', function(e) {
   e.preventDefault();
+  // Check auth for context menu
   if (!isAuthenticated) {
-    checkAuth(function() {
-      _showContextMenu(e);
-    });
-    return;
+    const pwd = prompt('请输入管理员密码：');
+    if (pwd !== ADMIN_PASSWORD) return;
+    isAuthenticated = true;
   }
-  _showContextMenu(e);
-});
-
-function _showContextMenu(e) {
   ctxTarget = null;
   closeCtxMenu();
 
@@ -1815,8 +1446,9 @@ function _showContextMenu(e) {
       }
     }
   }
-  // 空白处右键无操作
-}
+
+  // 空白处右键：无操作
+});
 
 document.addEventListener('click', function(e) {
   if (!e.target.closest('#ctxMenu')) closeCtxMenu();
@@ -1856,7 +1488,7 @@ function showCtxMenu(x, y, items) {
           const idx2 = parseInt(target) - 1;
           if (idx2 >= 0 && idx2 < data.sections.length) {
             data.quickLinks.splice(ctxTarget.linkIdx, 1);
-            data.sections[idx2].links.push({ emoji: '🔗', name: l.name, url: l.url });
+            data.sections[idx2].links.push({ emoji: guessEmoji(l.name, l.url), name: l.name, url: l.url });
             saveData(); render();
           }
         }
@@ -1882,8 +1514,17 @@ function ctxEdit() {
     const s = data.sections[ctxTarget.sectionIdx];
     const l = s.links[ctxTarget.linkIdx];
     modalMode = ctxTarget;
+    modalSvgData = null;
     document.getElementById('modalTitle').textContent = '编辑网址';
-    document.getElementById('modalEmoji').value = l.emoji;
+    document.getElementById('modalIconPreview').style.display = 'none';
+    if (l.emojiType === 'svg') {
+      document.getElementById('modalEmoji').value = '__svg__';
+      modalSvgData = l.emoji;
+      document.getElementById('modalIconPreview').style.display = 'flex';
+      document.getElementById('modalIconPreviewContent').innerHTML = '<img src="' + l.emoji + '" style="height:24px;width:24px;">';
+    } else {
+      document.getElementById('modalEmoji').value = l.emoji;
+    }
     document.getElementById('modalName').value = l.name;
     document.getElementById('modalUrl').value = l.url;
     const sel = document.getElementById('modalSection');
@@ -1919,290 +1560,694 @@ function ctxDelete() {
   closeCtxMenu();
 }
 
-// ===== 拖拽排序（鼠标事件方案）=====
+// ===== 拖拽 =====
 let dragData = null;
-let dragGhost = null;
-let dragPlaceholder = null;
-let dragStartY = 0;
-let dragItemRect = null;
+let dropIndicator = null;
 
-document.addEventListener('mousedown', function(e) {
-  // 只有按住 ⋮⋮ 把手才触发
-  const handle = e.target.closest('.drag-handle');
-  if (!handle) return;
-  
-  const card = handle.closest('.nav-card');
-  if (!card) return;
-  
-  const si = parseInt(card.dataset.si);
-  const li = parseInt(card.dataset.li);
-  if (isNaN(si) || isNaN(li)) return;
-  
-  e.preventDefault();
-  
-  // 记录拖拽数据
-  dragData = { type: 'card', si, li };
-  dragItemRect = card.getBoundingClientRect();
-  dragStartY = e.clientY;
-  
-  // 创建拖拽幽灵（跟随鼠标的半透明卡片）
-  dragGhost = card.cloneNode(true);
-  dragGhost.style.cssText = `position:fixed;width:${dragItemRect.width}px;height:${dragItemRect.height}px;left:${dragItemRect.left}px;top:${dragItemRect.top}px;pointer-events:none;z-index:9999;opacity:0.5;transform:scale(1.05);border-radius:14px;background:var(--card-bg);backdrop-filter:blur(8px);border:2px solid var(--accent);box-shadow:var(--shadow-hover);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;`;
-  // 只保留 emoji 和 label
-  const emoji = dragGhost.querySelector('.drag-handle');
-  if (emoji) emoji.remove();
-  document.body.appendChild(dragGhost);
-  
-  // 创建占位符（虚线框表示插入位置）
-  dragPlaceholder = document.createElement('div');
-  dragPlaceholder.className = 'drag-placeholder';
-  dragPlaceholder.style.cssText = `border:2px dashed var(--accent);border-radius:14px;background:var(--accent-glow);min-height:${dragItemRect.height}px;display:none;`;
-  
-  // 原卡片变透明
-  card.style.opacity = '0.2';
-  
-  document.addEventListener('mousemove', onMouseMove);
-  document.addEventListener('mouseup', onMouseUp);
-});
-
-function onMouseMove(e) {
-  if (!dragData || !dragGhost) return;
-  
-  // 移动幽灵卡片
-  const offsetY = e.clientY - dragStartY;
-  dragGhost.style.top = (dragItemRect.top + offsetY) + 'px';
-  
-  // 找到鼠标下的分类
-  const sections = [...document.querySelectorAll('#sectionContainer > .section')];
-  let targetSection = null;
-  let targetGrid = null;
-  
-  for (const sec of sections) {
-    const r = sec.getBoundingClientRect();
-    if (e.clientY >= r.top && e.clientY <= r.bottom) {
-      targetSection = sec;
-      targetGrid = sec.querySelector('.grid');
-      break;
-    }
+function ensureDropIndicator() {
+  if (!dropIndicator) {
+    dropIndicator = document.createElement('div');
+    dropIndicator.className = 'drop-indicator';
+    document.body.appendChild(dropIndicator);
   }
-  
-  if (!targetGrid) {
-    if (dragPlaceholder.parentNode) dragPlaceholder.remove();
-    return;
-  }
-  
-  // 计算在 grid 中的插入位置
-  const cards = [...targetGrid.querySelectorAll('.nav-card')];
-  let insertIdx = cards.length;
-  for (let i = 0; i < cards.length; i++) {
-    const r = cards[i].getBoundingClientRect();
-    if (e.clientY < r.top + r.height / 2) {
-      insertIdx = i;
-      break;
-    }
-  }
-  
-  // 把占位符移到正确位置
-  if (dragPlaceholder.parentNode !== targetGrid) {
-    if (dragPlaceholder.parentNode) dragPlaceholder.remove();
-    targetGrid.appendChild(dragPlaceholder);
-  }
-  
-  if (insertIdx < cards.length) {
-    targetGrid.insertBefore(dragPlaceholder, cards[insertIdx]);
-  } else {
-    targetGrid.appendChild(dragPlaceholder);
-  }
-  dragPlaceholder.style.display = 'flex';
+  return dropIndicator;
 }
 
-function onMouseUp(e) {
-  document.removeEventListener('mousemove', onMouseMove);
-  document.removeEventListener('mouseup', onMouseUp);
-  
-  if (!dragData) return;
-  
-  // 清理
-  if (dragGhost) { dragGhost.remove(); dragGhost = null; }
-  
-  // 恢复原卡片透明度
-  const origCard = document.querySelector(
-    `.nav-card[data-si="${dragData.si}"][data-li="${dragData.li}"]`
-  );
-  if (origCard) origCard.style.opacity = '';
-  
-  // 确定插入位置
-  if (dragPlaceholder && dragPlaceholder.parentNode) {
-    const grid = dragPlaceholder.parentNode;
-    const section = grid.closest('.section');
-    if (section) {
-      const targetSi = parseInt(section.dataset.si);
-      const cards = [...grid.querySelectorAll('.nav-card:not(.drag-placeholder)')];
-      const dropIdx = cards.indexOf(dragPlaceholder.nextElementSibling);
-      const finalIdx = dropIdx >= 0 ? dropIdx : cards.length;
-      
-      // 执行移动
-      const link = data.sections[dragData.si].links.splice(dragData.li, 1)[0];
-      if (targetSi === dragData.si) {
-        data.sections[targetSi].links.splice(finalIdx, 0, link);
-      } else {
-        data.sections[targetSi].links.splice(finalIdx, 0, link);
-      }
-      saveData();
-      render();
-    }
-    dragPlaceholder.remove();
+function getDropIndex(parent, clientY, childSelector) {
+  const children = [...parent.querySelectorAll(childSelector)];
+  for (let i = 0; i < children.length; i++) {
+    const rect = children[i].getBoundingClientRect();
+    if (clientY < rect.top + rect.height / 2) return i;
   }
-  
-  dragPlaceholder = null;
+  return children.length;
+}
+
+function showDropIndicator(el, insertBefore) {
+  const ind = ensureDropIndicator();
+  if (insertBefore) {
+    const rect = insertBefore.getBoundingClientRect();
+    ind.style.cssText = `left:${rect.left}px;width:${rect.width}px;top:${rect.top-4}px;opacity:1;position:fixed;height:3px;background:#8b6fe6;border-radius:4px;z-index:999;pointer-events:none;box-shadow:0 0 8px rgba(139,111,230,0.3);`;
+  } else {
+    const rect = el.getBoundingClientRect();
+    ind.style.cssText = `left:${rect.left}px;width:${rect.width}px;top:${rect.bottom+2}px;opacity:1;position:fixed;height:3px;background:#8b6fe6;border-radius:4px;z-index:999;pointer-events:none;box-shadow:0 0 8px rgba(139,111,230,0.3);`;
+  }
+}
+
+function hideDropIndicator() {
+  if (dropIndicator) dropIndicator.style.opacity = '0';
+}
+
+function onDragStart(e) {
+  const el = e.target.closest('[draggable]');
+  if (!el) return;
+  const type = el.dataset.type;
+  if (type === 'card') {
+    dragData = { type: 'card', si: parseInt(el.dataset.si), li: parseInt(el.dataset.li) };
+  } else if (type === 'quick') {
+    dragData = { type: 'quick', idx: parseInt(el.dataset.idx) };
+  }
+  el.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', 'drag');
+  document.getElementById('trashZone').classList.add('show');
+}
+
+function onDragEnd(e) {
+  const el = e.target.closest('[draggable]');
+  if (el) el.classList.remove('dragging');
+  document.getElementById('trashZone').classList.remove('show', 'drag-over');
+  document.querySelectorAll('.section.drag-hover,.quick-links.drag-hover').forEach(el => el.classList.remove('drag-hover'));
+  hideDropIndicator();
   dragData = null;
-  dragItemRect = null;
+}
+
+function onDragOverQuick(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const ql = document.getElementById('quickLinks');
+  ql.classList.add('drag-hover');
+  if (!dragData) return;
+  const idx = getDropIndex(ql, e.clientY, '.quick-link');
+  const children = ql.querySelectorAll('.quick-link');
+  showDropIndicator(ql, children[idx] || null);
+}
+
+function onDragLeaveQuick(e) {
+  const ql = document.getElementById('quickLinks');
+  if (!ql.contains(e.relatedTarget)) {
+    ql.classList.remove('drag-hover');
+    hideDropIndicator();
+  }
+}
+
+function onDropQuick(e) {
+  e.preventDefault();
+  hideDropIndicator();
+  document.getElementById('quickLinks').classList.remove('drag-hover');
+  if (!dragData) return;
+  const ql = document.getElementById('quickLinks');
+  const dropIdx = getDropIndex(ql, e.clientY, '.quick-link');
+
+  if (dragData.type === 'quick') {
+    const link = data.quickLinks.splice(dragData.idx, 1)[0];
+    data.quickLinks.splice(dropIdx, 0, link);
+  } else if (dragData.type === 'card') {
+    const link = data.sections[dragData.si].links[dragData.li];
+    if (!link) return;
+    data.sections[dragData.si].links.splice(dragData.li, 1);
+    data.quickLinks.splice(dropIdx, 0, { icon: 'svg', name: link.name, url: link.url });
+  }
+  saveData();
+  render();
+}
+
+function onDragOverSection(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const section = e.target.closest('.section');
+  if (!section || !dragData) return;
+  const targetSi = parseInt(section.dataset.si);
+
+  if (dragData.type === 'card' && targetSi === dragData.si) {
+    const grid = section.querySelector('.grid');
+    const idx = getDropIndex(grid, e.clientY, '.nav-card');
+    const children = grid.querySelectorAll('.nav-card');
+    showDropIndicator(grid, children[idx] || null);
+    return;
+  }
+  section.classList.add('drag-hover');
+}
+
+function onDragLeaveSection(e) {
+  const section = e.target.closest('.section');
+  if (section) { section.classList.remove('drag-hover'); hideDropIndicator(); }
+}
+
+function onDropSection(e) {
+  e.preventDefault();
+  hideDropIndicator();
+  const section = e.target.closest('.section');
+  if (!section || !dragData) return;
+  const targetSi = parseInt(section.dataset.si);
+
+  if (dragData.type === 'card') {
+    if (targetSi === dragData.si) {
+      const grid = section.querySelector('.grid');
+      const dropIdx = getDropIndex(grid, e.clientY, '.nav-card');
+      const link = data.sections[targetSi].links.splice(dragData.li, 1)[0];
+      data.sections[targetSi].links.splice(dropIdx, 0, link);
+      saveData(); render(); return;
+    }
+    const link = data.sections[dragData.si].links[dragData.li];
+    if (!link) return;
+    data.sections[dragData.si].links.splice(dragData.li, 1);
+    const grid = section.querySelector('.grid');
+    const dropIdx = getDropIndex(grid, e.clientY, '.nav-card');
+    data.sections[targetSi].links.splice(dropIdx, 0, link);
+  } else if (dragData.type === 'quick') {
+    const link = data.quickLinks[dragData.idx];
+    if (!link) return;
+    data.quickLinks.splice(dragData.idx, 1);
+    const grid = section.querySelector('.grid');
+    const dropIdx = getDropIndex(grid, e.clientY, '.nav-card');
+    data.sections[targetSi].links.splice(dropIdx, 0, { emoji: guessEmoji(link.name, link.url), name: link.name, url: link.url });
+  }
+
+  section.classList.remove('drag-hover');
+  saveData();
+  render();
+}
+
+// Trash zone
+document.addEventListener('dragover', function(e) {
+  const trash = document.getElementById('trashZone');
+  if (!trash.classList.contains('show')) return;
+  const rect = trash.getBoundingClientRect();
+  if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
+    e.preventDefault();
+    trash.classList.add('drag-over');
+  } else {
+    trash.classList.remove('drag-over');
+  }
+});
+
+document.addEventListener('drop', function(e) {
+  const trash = document.getElementById('trashZone');
+  if (!trash.classList.contains('show')) return;
+  const rect = trash.getBoundingClientRect();
+  if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
+    e.preventDefault();
+    if (!dragData) return;
+    let name = '';
+    if (dragData.type === 'card') name = data.sections[dragData.si]?.links[dragData.li]?.name || '';
+    else if (dragData.type === 'quick') name = data.quickLinks[dragData.idx]?.name || '';
+    if (name && confirm(`确定删除「${name}」？`)) {
+      if (dragData.type === 'card') data.sections[dragData.si].links.splice(dragData.li, 1);
+      else if (dragData.type === 'quick') data.quickLinks.splice(dragData.idx, 1);
+      saveData(); render();
+    }
+  }
+  trash.classList.remove('show', 'drag-over');
+});
+
+
+// ===== 密码登录系统 =====
+const ADMIN_PASSWORD_KEY = 'nav_admin_password';
+let ADMIN_PASSWORD = localStorage.getItem(ADMIN_PASSWORD_KEY) || '8587';
+let isAuthenticated = false;
+let pwdCallback = null;
+
+function checkAuth(fn) {
+  if (isAuthenticated) { fn(); return; }
+  pwdCallback = fn;
+  document.getElementById('pwdTitle').textContent = '🔒 请输入管理员密码';
+  document.getElementById('pwdInput').value = '';
+  document.getElementById('pwdError').style.opacity = '0';
+  document.getElementById('pwdInput').style.borderColor = 'var(--border-light)';
+  document.getElementById('pwdOverlay').classList.add('show');
+  setTimeout(() => document.getElementById('pwdInput').focus(), 100);
+}
+
+function submitPwd() {
+  const pwd = document.getElementById('pwdInput').value;
+  if (pwd === ADMIN_PASSWORD) {
+    isAuthenticated = true;
+    localStorage.setItem('nav_auth_session', '1');
+    const btn = document.getElementById('loginBtn');
+    if (btn) { btn.textContent = '🔓'; btn.title = '已登录'; }
+    document.getElementById('pwdOverlay').classList.remove('show');
+    if (pwdCallback) { pwdCallback(); pwdCallback = null; }
+  } else {
+    document.getElementById('pwdInput').style.borderColor = '#ef4444';
+    document.getElementById('pwdError').style.opacity = '1';
+    document.getElementById('pwdInput').value = '';
+    document.getElementById('pwdInput').focus();
+  }
+}
+
+function closePwdModal(ev) {
+  if (ev && ev.target !== document.getElementById('pwdOverlay')) return;
+  document.getElementById('pwdOverlay').classList.remove('show');
+  document.getElementById('pwdError').style.opacity = '0';
+  document.getElementById('pwdInput').style.borderColor = 'var(--border-light)';
+  pwdCallback = null;
+}
+
+function login() { checkAuth(function(){}); }
+
+function logout() {
+  isAuthenticated = false;
+  localStorage.removeItem('nav_auth_session');
+  document.getElementById('loginBtn').textContent = '🔒';
+  document.getElementById('loginBtn').title = '点击登录';
+}
+
+function changePasswordInline() {
+  const old = document.getElementById('oldPwdInput').value;
+  const n1 = document.getElementById('newPwdInput').value;
+  const n2 = document.getElementById('confirmPwdInput').value;
+  const msg = document.getElementById('pwdChangeMsg');
+  if (old !== ADMIN_PASSWORD) { msg.textContent = '❌ 当前密码错误'; showToast('当前密码错误','error'); document.getElementById('oldPwdInput').style.borderColor = '#ef4444'; return; }
+  if (!n1) { msg.textContent = '❌ 请输入新密码'; showToast('请输入新密码','error'); document.getElementById('newPwdInput').style.borderColor = '#ef4444'; return; }
+  if (n1 !== n2) { msg.textContent = '❌ 两次输入不一致'; showToast('两次输入不一致','error'); document.getElementById('confirmPwdInput').style.borderColor = '#ef4444'; return; }
+  ADMIN_PASSWORD = n1;
+  localStorage.setItem(ADMIN_PASSWORD_KEY, n1);
+  msg.textContent = '✅ 密码修改成功！';
+  showToast('✅ 密码修改成功','success');
+  document.getElementById('oldPwdInput').value = '';
+  document.getElementById('newPwdInput').value = '';
+  document.getElementById('confirmPwdInput').value = '';
+  document.getElementById('oldPwdInput').style.borderColor = '';
+  document.getElementById('newPwdInput').style.borderColor = '';
+  document.getElementById('confirmPwdInput').style.borderColor = '';
+  setTimeout(() => { msg.textContent = ''; }, 3000);
+}
+
+// Toast 提示
+function showToast(text, type) {
+  const t = document.createElement('div');
+  t.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:9999;padding:12px 24px;border-radius:14px;font-size:0.85rem;font-weight:500;box-shadow:0 4px 20px rgba(0,0,0,0.1);animation:fadeIn 0.2s ease;color:#fff;';
+  t.style.background = type === 'error' ? '#ef4444' : '#10b981';
+  t.textContent = text;
+  document.body.appendChild(t);
+  setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity 0.3s'; setTimeout(() => t.remove(), 300); }, 2000);
+}
+
+// 恢复登录状态
+if (localStorage.getItem('nav_auth_session') === '1') {
+  isAuthenticated = true;
+  const btn = document.getElementById('loginBtn');
+  if (btn) { btn.textContent = '🔓'; btn.title = '已登录'; }
+}
+
+
+function guessEmoji(name, url) {
+  const nameMap = {
+    '百度': '🅱️', 'Google': '🅶', 'GitHub': '🐙', '微博': '📱', '知乎': '💡',
+    'B站': '📺', '小红书': '📕', '189邮箱': '📧', '青柠': '🍋', 'DeepSeek': '🧠',
+    'Hermes': '🤖', 'Yandex': '🇾', '126邮箱': '📧', '青禾导航': '🏠',
+    'SeedHub': '🌰', 'YouTube': '▶️', '游戏下载': '🎮', '夸克网盘': '📦',
+    'GGJAV': '🎬', '91CG': '🔞', 'PornHub': '📺', 'X': '🐦',
+    '抖音': '🎵', 'Apple Music': '🎵', '低端影视': '🎥', '网飞猫': '🐱',
+    '剧OK': '🎬', '51吃瓜': '🍉', 'Lemon Live': '🍋', '云影': '☁️',
+    '免费影视': '🆓', '听友FM': '🎧', 'KuKuTool': '🛠️', '刘明野工具箱': '🧰',
+    '良心云': '☁️', '养殖OA': '⚡', '集团OA': '🏢', 'NCC': '💻',
+    'Hermes Agent': '🤖', '嗨云': '☁️', '游戏下载吧': '🎮'
+  };
+  if (nameMap[name]) return nameMap[name];
+  if (!url) return '🌐';
+  const u = url.toLowerCase();
+  if (u.includes('google')) return '🅶';
+  if (u.includes('youtube')) return '▶️';
+  if (u.includes('github')) return '🐙';
+  if (u.includes('bilibili')) return '📺';
+  if (u.includes('zhihu')) return '💡';
+  if (u.includes('weibo')) return '📱';
+  if (u.includes('xiaohongshu')) return '📕';
+  if (u.includes('douyin')) return '🎵';
+  if (u.includes('baidu')) return '🅱️';
+  if (u.includes('bing')) return '🅱️';
+  if (u.includes('yandex')) return '🇾';
+  if (u.includes('pornhub') || u.includes('91cg') || u.includes('ggjav')) return '🔞';
+  if (u.includes('x.com')) return '🐦';
+  if (u.includes('apple')) return '🎵';
+  if (u.includes('quark') || u.includes('pan')) return '📦';
+  if (u.includes('hysoon') || u.includes('cloud')) return '☁️';
+  return '🌐';
+}
+
+// ===== 分类折叠 & 加密 =====
+document.addEventListener('click', function(e) {
+  const header = e.target.closest('.section-header');
+  if (!header) return;
+  const section = header.closest('.section');
+  if (!section) return;
+  const si = parseInt(section.dataset.si);
+  const secData = data.sections[si];
+  if (!secData) return;
+  if (secData.password && section.classList.contains('locked')) {
+    if (isAuthenticated) {
+      section.classList.remove('locked');
+      section.classList.toggle('collapsed');
+    } else {
+      checkAuth(function() { section.classList.remove('locked'); section.classList.toggle('collapsed'); });
+    }
+    return;
+  }
+  if (secData.password && !section.classList.contains('locked')) {
+    section.classList.toggle('collapsed');
+    return;
+  }
+  section.classList.toggle('collapsed');
+});
+
+// ===== 分类排序（设置里） =====
+function moveSection(idx, dir) {
+  const newIdx = idx + dir;
+  if (newIdx < 0 || newIdx >= data.sections.length) return;
+  const item = data.sections.splice(idx, 1)[0];
+  data.sections.splice(newIdx, 0, item);
+  saveData();
+  render();
+  renderSettingsSections();
+}
+
+// ===== 数据导出/导入 =====
+function exportData() {
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '导航数据备份_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function importData() {
+  const inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = '.json';
+  inp.onchange = function(ev) {
+    const file = ev.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev2) {
+      try {
+        const imported = JSON.parse(ev2.target.result);
+        if (!imported.sections || !imported.quickLinks) { alert('文件格式不正确'); return; }
+        if (confirm('确定导入？当前数据将被覆盖！')) { data = imported; saveData(); render(); alert('导入成功！'); }
+      } catch(err) { alert('文件解析失败：' + err.message); }
+    };
+    reader.readAsText(file);
+  };
+  inp.click();
+}
+
+// ===== 一键获取网站图标 =====
+function fetchAllIcons() {
+  if (!confirm('将自动从所有网址抓取官方图标，覆盖现有 Emoji？')) return;
+  let total = 0;
+  const processList = [];
+
+  data.sections.forEach(s => {
+    s.links.forEach(l => {
+      if (!l.url) return;
+      total++;
+      processList.push({ item: l });
+    });
+  });
+
+  if (total === 0) { showToast('没有要处理的网址', 'error'); return; }
+
+  // 创建进度弹窗
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:9999;display:flex;align-items:center;justify-content:center;';
+  overlay.innerHTML = '<div style="background:var(--modal-bg);border-radius:20px;padding:28px 36px;min-width:320px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.15);animation:popIn 0.2s ease;">' +
+    '<div style="font-size:0.9rem;font-weight:600;color:var(--text);margin-bottom:12px;">🔄 正在获取图标</div>' +
+    '<div id="fetchProgress" style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:16px;">准备中...</div>' +
+    '<div style="width:100%;height:6px;background:var(--border-light);border-radius:4px;overflow:hidden;">' +
+    '<div id="fetchBar" style="width:0%;height:100%;background:linear-gradient(90deg,var(--accent),#4a5ae0);border-radius:4px;transition:width 0.3s;"></div></div>' +
+    '<div style="margin-top:12px;font-size:0.75rem;color:var(--text-secondary);" id="fetchDetail"></div></div>';
+  document.body.appendChild(overlay);
+
+  let done = 0;
+  let success = 0;
+
+  function updateProgress() {
+    const pct = Math.round((done / total) * 100);
+    document.getElementById('fetchBar').style.width = pct + '%';
+    document.getElementById('fetchProgress').textContent = '进度：' + done + '/' + total + '（成功 ' + success + ' 个）';
+  }
+
+  function processNext() {
+    if (processList.length === 0) {
+      document.getElementById('fetchProgress').textContent = '✅ 完成！成功获取 ' + success + '/' + total + ' 个图标';
+      document.getElementById('fetchDetail').textContent = '';
+      overlay.onclick = function() { overlay.remove(); saveData(); render(); };
+      setTimeout(() => { overlay.remove(); saveData(); render(); }, 2000);
+      return;
+    }
+    const { item } = processList.shift();
+    const name = item.name || '未知';
+    document.getElementById('fetchDetail').textContent = '正在获取：' + name;
+
+    const img = new Image();
+    let used = false;
+    const timeout = setTimeout(() => {
+      if (!used) { used = true; done++; updateProgress(); processNext(); }
+    }, 3000);
+
+    try {
+      const u = new URL(item.url);
+      // 依次尝试多个可能的 favicon 路径
+      const paths = [
+        u.origin + '/favicon.ico',
+        u.origin + '/favicon.png',
+        u.origin + '/apple-touch-icon.png',
+        u.origin + '/apple-touch-icon-precomposed.png',
+        u.origin + '/assets/favicon.ico',
+        u.origin + '/static/favicon.ico',
+        u.origin + '/favicon.svg',
+        'https://www.google.com/s2/favicons?domain=' + u.origin + '&sz=32',
+        'https://icon.horse/icon/' + u.origin,
+      ];
+      let pathIdx = 0;
+
+      function tryPath() {
+        if (pathIdx >= paths.length) {
+          if (!used) { used = true; clearTimeout(timeout); done++; updateProgress(); processNext(); }
+          return;
+        }
+        img.src = paths[pathIdx] + '?_=' + Date.now();
+        pathIdx++;
+      }
+
+      img.crossOrigin = 'anonymous';
+      img.onload = function() {
+        if (used) return; used = true; clearTimeout(timeout);
+        const c = document.createElement('canvas');
+        c.width = img.width || 32; c.height = img.height || 32;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        const dataUrl = c.toDataURL('image/png');
+        // 排除 1x1 的空白图标
+        if (dataUrl && dataUrl.length < 50000 && img.width > 1 && img.height > 1) {
+          item.emoji = dataUrl;
+          item.emojiType = 'svg';
+          success++;
+        }
+        done++; updateProgress(); processNext();
+      };
+      img.onerror = function() {
+        if (used) return;
+        // 尝试下一个路径
+        tryPath();
+      };
+      tryPath();
+    } catch(e) {
+      if (!used) { used = true; clearTimeout(timeout); done++; updateProgress(); processNext(); }
+    }
+  }
+
+  updateProgress();
+  processNext();
+}
+
+// ===== 云端备份（GitHub Gist）=====
+function backupToCloud() {
+  checkAuth(function() {
+    const token2 = prompt('请输入 GitHub Token（需要 gist 权限）：');
+    if (!token2) return;
+    const json = JSON.stringify(data, null, 2);
+    const filename = 'nav-data-' + new Date().toISOString().slice(0,10) + '.json';
+    fetch('https://api.github.com/gists', {
+      headers: {'Authorization': 'token ' + token2, 'Accept': 'application/vnd.github.v3+json'}
+    }).then(r => r.json()).then(gists => {
+      const existing = Array.isArray(gists) ? gists.find(g => Object.keys(g.files||{}).some(fn => fn.startsWith('nav-data-'))) : null;
+      const files = {}; files[filename] = { content: json };
+      if (existing) {
+        return fetch(existing.url, { method: 'PATCH', headers: {'Authorization': 'token ' + token2, 'Content-Type': 'application/json'}, body: JSON.stringify({ files }) }).then(r => r.json());
+      } else {
+        return fetch('https://api.github.com/gists', { method: 'POST', headers: {'Authorization': 'token ' + token2, 'Content-Type': 'application/json'}, body: JSON.stringify({ description: '导航数据备份', public: false, files }) }).then(r => r.json());
+      }
+    }).then(result => {
+      if (result.html_url) { alert('备份成功！'); localStorage.setItem('nav_gist_url', result.html_url); }
+      else { alert('备份失败：' + (result.message || '未知错误')); }
+    }).catch(err => alert('网络错误：' + err.message));
+  });
+}
+
+function restoreFromCloud() {
+  checkAuth(function() {
+    const token2 = prompt('请输入 GitHub Token：');
+    if (!token2) return;
+    const gistUrl = localStorage.getItem('nav_gist_url');
+    if (!gistUrl) { alert('没有找到备份记录'); return; }
+    fetch('https://api.github.com/gists/' + gistUrl.split('/').pop(), {
+      headers: {'Authorization': 'token ' + token2, 'Accept': 'application/vnd.github.v3+json'}
+    }).then(r => r.json()).then(gist => {
+      const fc = Object.values(gist.files || {})[0];
+      if (!fc) { alert('Gist 中没有数据'); return; }
+      const imported = JSON.parse(fc.content);
+      if (confirm('确定从云端恢复？当前数据将被覆盖！')) { data = imported; saveData(); render(); alert('恢复成功！'); }
+    }).catch(err => alert('恢复失败：' + err.message));
+  });
 }
 
 // ===== 记事本 =====
 const NOTEPAD_KEY = 'nav_notepad_content';
-let notepadUnlocked = false;
+const NOTEPAD_GIST_KEY = 'nav_notepad_gist_id';
+
+function saveNotepadToGist() {
+  const token = localStorage.getItem('nav_gist_token');
+  const gistId = localStorage.getItem(NOTEPAD_GIST_KEY);
+  if (!token || !gistId) return;
+  const text = document.getElementById('notepadContent').value;
+  const filename = 'notepad.md';
+  const files = {};
+  files[filename] = { content: text };
+  fetch('https://api.github.com/gists/' + gistId, {
+    method: 'PATCH',
+    headers: {'Authorization': 'token ' + token, 'Content-Type': 'application/json'},
+    body: JSON.stringify({ files })
+  }).catch(function(){});
+}
+
+function loadNotepadFromGist(callback) {
+  const token = localStorage.getItem('nav_gist_token');
+  const gistId = localStorage.getItem(NOTEPAD_GIST_KEY);
+  if (!token || !gistId) { if(callback) callback(); return; }
+  fetch('https://api.github.com/gists/' + gistId, {
+    headers: {'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json'}
+  }).then(function(r){ return r.json(); }).then(function(gist){
+    const files = gist.files || {};
+    const first = Object.values(files)[0];
+    if (first && first.content) {
+      localStorage.setItem(NOTEPAD_KEY, first.content);
+    }
+    if(callback) callback();
+  }).catch(function(){ if(callback) callback(); });
+}
+
+function setupNotepadGist() {
+  // 复用云同步的 token
+  const config = getCloudConfig();
+  let token = config.token;
+  if (!token) {
+    token = prompt('请输入 GitHub Token（需要 gist 权限，用于同步记事本）：');
+    if (!token) return;
+  }
+  localStorage.setItem('nav_gist_token', token);
+  // 检查是否已有 Gist
+  const existingId = localStorage.getItem(NOTEPAD_GIST_KEY);
+  if (existingId) {
+    showToast('已配置 Gist 同步', 'success');
+    return;
+  }
+  // 创建新 Gist
+  const text = document.getElementById('notepadContent').value || '# 记事本';
+  fetch('https://api.github.com/gists', {
+    method: 'POST',
+    headers: {'Authorization': 'token ' + token, 'Content-Type': 'application/json'},
+    body: JSON.stringify({ description: '导航页记事本', public: false, files: { 'notepad.md': { content: text } } })
+  }).then(function(r){ return r.json(); }).then(function(result){
+    if (result.id) {
+      localStorage.setItem(NOTEPAD_GIST_KEY, result.id);
+      showToast('✅ 记事本同步已开启', 'success');
+    } else {
+      showToast('创建 Gist 失败：' + (result.message || ''), 'error');
+    }
+  }).catch(function(err){ showToast('网络错误', 'error'); });
+}
 
 function openNotepad() {
-  if (!isAuthenticated) {
-    checkAuth(function() { _openNotepad(); });
-  } else {
-    _openNotepad();
-  }
+  if (!isAuthenticated) { checkAuth(function(){ _openNotepad(); }); } else { _openNotepad(); }
 }
-
 function _openNotepad() {
-  const saved = localStorage.getItem(NOTEPAD_KEY);
-  document.getElementById('notepadContent').value = saved || '';
-  updateNotepadWordCount();
-  document.getElementById('notepadOverlay').classList.add('show');
-  document.getElementById('notepadContent').focus();
+  // 尝试从 Gist 加载最新内容
+  loadNotepadFromGist(function() {
+    document.getElementById('notepadContent').value = localStorage.getItem(NOTEPAD_KEY) || '';
+    updateNotepadWordCount();
+    document.getElementById('notepadOverlay').classList.add('show');
+    document.getElementById('notepadContent').focus();
+  });
 }
-
 function closeNotepad(ev) {
   if (ev && ev.target !== document.getElementById('notepadOverlay')) return;
   saveNotepad();
   document.getElementById('notepadOverlay').classList.remove('show');
 }
-
-function saveNotepad() {
-  const text = document.getElementById('notepadContent').value;
-  localStorage.setItem(NOTEPAD_KEY, text);
-  updateNotepadWordCount();
-}
-
-function updateNotepadWordCount() {
-  const text = document.getElementById('notepadContent').value;
-  document.getElementById('notepadWordCount').textContent = text.length + ' 字';
+function saveNotepad() { localStorage.setItem(NOTEPAD_KEY, document.getElementById('notepadContent').value); updateNotepadWordCount(); saveNotepadToGist(); showToast('已保存','success'); }
+function updateNotepadWordCount() { document.getElementById('notepadWordCount').textContent = document.getElementById('notepadContent').value.length + ' 字'; }
+function setupNotepadSync() {
+  if (!isAuthenticated) { checkAuth(function(){ setupNotepadGist(); }); } else { setupNotepadGist(); }
 }
 
 function exportNotepad() {
-  const text = document.getElementById('notepadContent').value;
-  const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
+  const blob = new Blob([document.getElementById('notepadContent').value], {type: 'text/plain;charset=utf-8'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = '记事本_' + new Date().toISOString().slice(0,10) + '.txt';
-  a.click();
-  URL.revokeObjectURL(a.href);
+  a.click(); URL.revokeObjectURL(a.href);
 }
-
 function importNotepad() {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = '.txt,.md';
-  input.onchange = function(ev) {
+  const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.txt,.md';
+  inp.onchange = function(ev) {
     const file = ev.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = function(ev2) {
-      document.getElementById('notepadContent').value = ev2.target.result;
-      updateNotepadWordCount();
-    };
+    reader.onload = function(ev2) { document.getElementById('notepadContent').value = ev2.target.result; updateNotepadWordCount(); };
     reader.readAsText(file);
   };
-  input.click();
+  inp.click();
 }
+document.addEventListener('input', function(e) { if (e.target.id === 'notepadContent') updateNotepadWordCount(); });
 
-// Auto-save on input
-document.addEventListener('input', function(e) {
-  if (e.target.id === 'notepadContent') {
-    updateNotepadWordCount();
-  }
-});
-
+// ===== 卡片拖拽排序（鼠标事件）=====
 // ===== 网络状态检测 =====
 function checkAllSites() {
-  const dots = document.querySelectorAll('.status-dot');
-  dots.forEach(dot => {
+  document.querySelectorAll('.status-dot').forEach(dot => {
     const url = dot.dataset.url;
     if (!url) return;
-    const img = new Image();
     const start = Date.now();
-    img.onload = function() {
-      const ms = Date.now() - start;
-      dot.className = 'status-dot ' + (ms < 500 ? 'online' : 'slow');
-    };
-    img.onerror = function() {
-      dot.className = 'status-dot offline';
-    };
-    // Use favicon for lightweight check
-    try {
-      const u = new URL(url);
-      img.src = u.origin + '/favicon.ico?_=' + Date.now();
-    } catch(e) {
-      dot.className = 'status-dot offline';
-    }
-    // Timeout after 5s
-    setTimeout(() => { if (!img.complete) { dot.className = 'status-dot slow'; } }, 3000);
+    const img = new Image();
+    img.onload = function() { dot.className = 'status-dot ' + (Date.now() - start < 3000 ? 'online' : 'slow'); };
+    img.onerror = function() { dot.className = 'status-dot offline'; };
+    try { const u = new URL(url); img.src = u.origin + '/favicon.ico?_=' + Date.now(); }
+    catch(e) { dot.className = 'status-dot offline'; }
+    setTimeout(() => { if (!img.complete) dot.className = 'status-dot slow'; }, 3000);
   });
 }
 
 // ===== 启动 =====
-render();
-// 页面加载后检查一次，之后每 60 秒检查一次
-setTimeout(checkAllSites, 500);
-setInterval(checkAllSites, 60000);
-setTimeout(autoSyncFromCloud, 300);
-document.addEventListener('DOMContentLoaded', function() {
+// 尝试从云端恢复
+restoreFromCloudAuto(function() {
   render();
-  // 恢复主题
-  if (localStorage.getItem('nav_theme') === 'dark') {
-    document.body.classList.add('dark-mode');
-    document.getElementById('themeBtn').textContent = '🌙';
-  }
-  // 恢复登录状态
-  if (localStorage.getItem('nav_auth_session') === '1') {
-    isAuthenticated = true;
-    const btn = document.getElementById('loginBtn');
-    if (btn) { btn.textContent = '🔓'; btn.title = '已登录'; }
-  }
-  updateClock();
-  setInterval(updateClock, 1000);
+  setTimeout(checkAllSites, 500);
+  setInterval(checkAllSites, 60000);
 });
 
 // 主题切换
 function toggleTheme() {
   document.body.classList.toggle('dark-mode');
-  const isDark = document.body.classList.contains('dark-mode');
-  document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
-  localStorage.setItem('nav_theme', isDark ? 'dark' : 'light');
+  document.getElementById('themeBtn').textContent = document.body.classList.contains('dark-mode') ? '🌙' : '☀️';
+  localStorage.setItem('nav_theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+}
+if (localStorage.getItem('nav_theme') === 'dark') {
+  document.body.classList.add('dark-mode');
+  document.getElementById('themeBtn').textContent = '🌙';
 }
 
-
-// 北京时间时钟
+// 北京时间
 function updateClock() {
   const now = new Date();
   const bj = new Date(now.toLocaleString('en-US', {timeZone: 'Asia/Shanghai'}));
-  const year = bj.getFullYear();
-  const month = String(bj.getMonth() + 1).padStart(2, '0');
-  const day = String(bj.getDate()).padStart(2, '0');
-  const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
-  const weekday = weekdays[bj.getDay()];
-  const hours = String(bj.getHours()).padStart(2, '0');
-  const minutes = String(bj.getMinutes()).padStart(2, '0');
-  const seconds = String(bj.getSeconds()).padStart(2, '0');
-  document.getElementById('clockDisplay').textContent =
-    `🕐 ${year}年${month}月${day}日 周${weekday} ${hours}:${minutes}:${seconds}`;
+  const y = bj.getFullYear();
+  const m = String(bj.getMonth()+1).padStart(2,'0');
+  const d = String(bj.getDate()).padStart(2,'0');
+  const w = ['日','一','二','三','四','五','六'][bj.getDay()];
+  const h = String(bj.getHours()).padStart(2,'0');
+  const min = String(bj.getMinutes()).padStart(2,'0');
+  const s = String(bj.getSeconds()).padStart(2,'0');
+  document.getElementById('clockDisplay').textContent = `${y}年${m}月${d}日 周${w} ${h}:${min}:${s}`;
 }
 updateClock();
 setInterval(updateClock, 1000);
@@ -2216,10 +2261,42 @@ document.getElementById('pageTitle').ondblclick = function(e) {
     render();
   }
 };
-
-} catch(e) {
-  document.body.innerHTML = '<div style="padding:40px;font-family:sans-serif;"><h2>⚠️ 出错了</h2><pre style="background:#f5f5f5;padding:16px;border-radius:8px;margin-top:16px;overflow:auto;">' + e.message + '\n' + e.stack + '</pre></div>';
-}
 </script>
+
+<!-- ===== 密码输入弹窗 ===== -->
+<div id="pwdOverlay" class="modal-overlay" onclick="closePwdModal(event)">
+  <div class="modal" onclick="event.stopPropagation()" style="max-width:360px;text-align:center;">
+    <h2 id="pwdTitle" style="font-size:1.1rem;margin-bottom:16px;color:var(--text);font-weight:650;">🔒 请输入管理员密码</h2>
+    <input type="password" id="pwdInput" placeholder="输入密码"
+      style="width:100%;padding:12px 16px;border:2px solid var(--border-light);border-radius:14px;font-size:1rem;outline:none;background:var(--input-bg);color:var(--text);text-align:center;transition:border-color 0.2s;"
+      onkeydown="if(event.key==='Enter')submitPwd()" oninput="this.style.borderColor='var(--border-light)'">
+    <div id="pwdError" style="font-size:0.8rem;color:#ef4444;margin-top:8px;min-height:20px;opacity:0;transition:opacity 0.2s;">密码错误</div>
+    <div class="modal-actions" style="justify-content:center;margin-top:16px;">
+      <button class="btn-cancel" onclick="closePwdModal()">取消</button>
+      <button class="btn-confirm" onclick="submitPwd()">确定</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 记事本弹窗 ===== -->
+<div id="notepadOverlay" class="modal-overlay" onclick="closeNotepad(event)">
+  <div class="modal" onclick="event.stopPropagation()" style="max-width:600px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <h2 style="font-size:1.1rem;color:var(--text);font-weight:650;margin:0;">📝 记事本</h2>
+      <div style="display:flex;gap:6px;">
+        <button class="btn-icon" onclick="saveNotepad()" title="保存" style="width:auto;border-radius:10px;padding:6px 14px;font-size:0.75rem;gap:4px;">💾 保存</button>
+        <button class="btn-icon" onclick="setupNotepadSync()" title="开启云同步" style="width:auto;border-radius:10px;padding:6px 14px;font-size:0.75rem;gap:4px;">☁️ 同步</button>
+        <button class="btn-icon" onclick="exportNotepad()" title="导出" style="width:auto;border-radius:10px;padding:6px 14px;font-size:0.75rem;gap:4px;">📤</button>
+        <button class="btn-icon" onclick="importNotepad()" title="导入" style="width:auto;border-radius:10px;padding:6px 14px;font-size:0.75rem;gap:4px;">📥</button>
+      </div>
+    </div>
+    <textarea id="notepadContent" style="width:100%;height:50vh;min-height:300px;padding:16px;border:1.5px solid var(--border-light);border-radius:14px;font-size:0.9rem;line-height:1.7;outline:none;background:var(--input-bg);color:var(--text);resize:vertical;font-family:inherit;" placeholder="在这里写笔记..."></textarea>
+    <div class="modal-actions" style="margin-top:12px;">
+      <span style="font-size:0.75rem;color:var(--text-secondary);" id="notepadWordCount">0 字</span>
+      <button class="btn-cancel" onclick="closeNotepad()">关闭</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
