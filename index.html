@@ -946,8 +946,90 @@ function loadData() {
   return JSON.parse(JSON.stringify(DEFAULT_DATA));
 }
 
+// 自动云同步配置
+const CLOUD_CONFIG_KEY = 'nav_cloud_config';
+
+function getCloudConfig() {
+  try { return JSON.parse(localStorage.getItem(CLOUD_CONFIG_KEY)) || {}; } catch(e) { return {}; }
+}
+
+function saveCloudConfig(config) {
+  localStorage.setItem(CLOUD_CONFIG_KEY, JSON.stringify(config));
+}
+
+let cloudSyncTimer = null;
+let cloudSyncPending = false;
+
+function syncDataToCloud() {
+  const config = getCloudConfig();
+  if (!config.token || !config.gistId) return;
+  if (cloudSyncTimer) clearTimeout(cloudSyncTimer);
+  cloudSyncTimer = setTimeout(function() {
+    const json = JSON.stringify(data, null, 2);
+    const files = {};
+    files['nav-data.json'] = { content: json };
+    fetch('https://api.github.com/gists/' + config.gistId, {
+      method: 'PATCH',
+      headers: {'Authorization': 'token ' + config.token, 'Content-Type': 'application/json'},
+      body: JSON.stringify({ files })
+    }).catch(function(){});
+    cloudSyncTimer = null;
+  }, 2000); // 防抖2秒，避免频繁保存时重复请求
+}
+
+function restoreFromCloudAuto(callback) {
+  const config = getCloudConfig();
+  if (!config.token || !config.gistId) { if(callback) callback(); return; }
+  fetch('https://api.github.com/gists/' + config.gistId, {
+    headers: {'Authorization': 'token ' + config.token, 'Accept': 'application/vnd.github.v3+json'}
+  }).then(function(r){ return r.json(); }).then(function(gist){
+    const files = gist.files || {};
+    const first = Object.values(files)[0];
+    if (first && first.content) {
+      try {
+        const imported = JSON.parse(first.content);
+        if (imported.sections && imported.quickLinks) {
+          data = imported;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+      } catch(e) {}
+    }
+    if(callback) callback();
+  }).catch(function(){ if(callback) callback(); });
+}
+
+function setupCloudSync() {
+  const token = prompt('请输入 GitHub Token（需要 gist 权限）：');
+  if (!token) return;
+  const config = getCloudConfig();
+  config.token = token;
+  
+  if (config.gistId) {
+    saveCloudConfig(config);
+    showToast('✅ 云同步已配置', 'success');
+    return;
+  }
+  
+  // 创建新 Gist
+  const json = JSON.stringify(data, null, 2);
+  fetch('https://api.github.com/gists', {
+    method: 'POST',
+    headers: {'Authorization': 'token ' + token, 'Content-Type': 'application/json'},
+    body: JSON.stringify({ description: '导航数据云同步', public: false, files: { 'nav-data.json': { content: json } } })
+  }).then(function(r){ return r.json(); }).then(function(result){
+    if (result.id) {
+      config.gistId = result.id;
+      saveCloudConfig(config);
+      showToast('✅ 云同步已开启', 'success');
+    } else {
+      showToast('创建失败：' + (result.message || ''), 'error');
+    }
+  }).catch(function(){ showToast('网络错误', 'error'); });
+}
+
 function saveData() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  syncDataToCloud();
 }
 
 function renderSVGIcon(name) {
@@ -1156,6 +1238,7 @@ function renderSettingsSections() {
         <button class="btn-icon" onclick="exportData()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">📤 导出数据</button>
         <button class="btn-icon" onclick="importData()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">📥 导入数据</button>
         <button class="btn-icon" onclick="fetchAllIcons()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;background:linear-gradient(135deg,var(--accent),#4a5ae0);color:#fff;border:none;">🔄 获取图标</button>
+        <button class="btn-icon" onclick="setupCloudSync()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;background:linear-gradient(135deg,#34c759,#28a745);color:#fff;border:none;">🔄 自动同步</button>
         <button class="btn-icon" onclick="backupToCloud()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">☁️ 云端备份</button>
         <button class="btn-icon" onclick="restoreFromCloud()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">⬇️ 云端恢复</button>
       </div>
@@ -1188,6 +1271,7 @@ function renderSettingsQuick() {
         <button class="btn-icon" onclick="exportData()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">📤 导出数据</button>
         <button class="btn-icon" onclick="importData()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">📥 导入数据</button>
         <button class="btn-icon" onclick="fetchAllIcons()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;background:linear-gradient(135deg,var(--accent),#4a5ae0);color:#fff;border:none;">🔄 获取图标</button>
+        <button class="btn-icon" onclick="setupCloudSync()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;background:linear-gradient(135deg,#34c759,#28a745);color:#fff;border:none;">🔄 自动同步</button>
         <button class="btn-icon" onclick="backupToCloud()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">☁️ 云端备份</button>
         <button class="btn-icon" onclick="restoreFromCloud()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">⬇️ 云端恢复</button>
       </div>
@@ -2044,8 +2128,13 @@ function loadNotepadFromGist(callback) {
 }
 
 function setupNotepadGist() {
-  const token = prompt('请输入 GitHub Token（需要 gist 权限，用于同步记事本）：');
-  if (!token) return;
+  // 复用云同步的 token
+  const config = getCloudConfig();
+  let token = config.token;
+  if (!token) {
+    token = prompt('请输入 GitHub Token（需要 gist 权限，用于同步记事本）：');
+    if (!token) return;
+  }
   localStorage.setItem('nav_gist_token', token);
   // 检查是否已有 Gist
   const existingId = localStorage.getItem(NOTEPAD_GIST_KEY);
@@ -2129,10 +2218,12 @@ function checkAllSites() {
 }
 
 // ===== 启动 =====
-render();
-setTimeout(checkAllSites, 500);
-setInterval(checkAllSites, 60000);
-render();
+// 尝试从云端恢复
+restoreFromCloudAuto(function() {
+  render();
+  setTimeout(checkAllSites, 500);
+  setInterval(checkAllSites, 60000);
+});
 
 // 主题切换
 function toggleTheme() {
