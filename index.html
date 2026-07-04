@@ -2,24 +2,63 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="刘海泉的导航">
+<meta name="description" content="刘海泉的导航站 - 常用网址一键直达">
+<meta name="theme-color" content="#f8f6fc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1a2e" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%238b6fe6%22/><text x=%2250%22 y=%2268%22 text-anchor=%22middle%22 font-size=%2260%22 fill=%22white%22>N</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%238b6fe6%22/><text x=%2250%22 y=%2268%22 text-anchor=%22middle%22 font-size=%2260%22 fill=%22white%22>N</text></svg>">
+<link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;我的导航&quot;,&quot;short_name&quot;:&quot;导航&quot;,&quot;start_url&quot;:&quot;./&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#f8f6fc&quot;,&quot;theme_color&quot;:&quot;#8b6fe6&quot;,&quot;icons&quot;:[{&quot;src&quot;:&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%238b6fe6%22/><text x=%2250%22 y=%2268%22 text-anchor=%22middle%22 font-size=%2260%22 fill=%22white%22>N</text></svg>&quot;,&quot;sizes&quot;:&quot;100x100&quot;,&quot;type&quot;:&quot;image/svg+xml&quot;}]}">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>刘海泉的导航站</title>
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>我的导航</title>
 <style>
   :root {
-    --bg: #f8f6fc;
-    --card-bg: rgba(255,255,255,0.75);
-    --card-border: rgba(255,255,255,0.6);
-    --text: #2d2a3e;
-    --text-secondary: #8884a0;
-    --accent: #8b6fe6;
-    --accent-glow: rgba(139,111,230,0.2);
-    --radius: 18px;
-    --shadow: 0 2px 16px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.02);
-    --shadow-hover: 0 8px 32px rgba(139,111,230,0.10), 0 0 0 1px rgba(139,111,230,0.06);
-    --transition: 0.25s cubic-bezier(0.22,1,0.36,1);
+    --bg: #f5f5f7;
+    --card-bg: rgba(255,255,255,0.65);
+    --card-border: rgba(0,0,0,0.06);
+    --text: #1d1d1f;
+    --text-secondary: #86868b;
+    --accent: #0071e3;
+    --accent-glow: rgba(0,113,227,0.12);
+    --radius: 14px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04);
+    --shadow-hover: 0 4px 12px rgba(0,113,227,0.08);
+    --transition: 0.2s ease;
+    --modal-bg: #fff;
+    --settings-bg: #f5f5f7;
+    --settings-hover: #e8e8ed;
+    --input-bg: #f5f5f7;
+    --border-light: #d2d2d7;
+    --divider: #d2d2d7;
+    --ctx-bg: rgba(255,255,255,0.95);
+    --trash-bg: rgba(254,202,202,0.85);
+  }
+  .dark-mode {
+    --bg: #1d1d1f;
+    --card-bg: rgba(44,44,46,0.7);
+    --card-border: rgba(255,255,255,0.06);
+    --text: #f5f5f7;
+    --text-secondary: #86868b;
+    --accent: #2997ff;
+    --accent-glow: rgba(41,151,255,0.12);
+    --shadow: 0 1px 3px rgba(0,0,0,0.2);
+    --shadow-hover: 0 4px 12px rgba(41,151,255,0.08);
+    --modal-bg: #2c2c2e;
+    --settings-bg: #2c2c2e;
+    --settings-hover: #3a3a3c;
+    --input-bg: #3a3a3c;
+    --border-light: #48484a;
+    --divider: #48484a;
+    --ctx-bg: rgba(44,44,46,0.95);
+    --trash-bg: rgba(127,29,29,0.7);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,11 +70,8 @@
     padding: 48px 24px 80px;
     color: var(--text);
     background-image:
-      radial-gradient(ellipse 80% 60% at 0% 10%, rgba(139,111,230,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 100% 90%, rgba(96,165,250,0.06) 0%, transparent 60%);
-  }
 
-  .container { max-width: 960px; margin: 0 auto; }
+  .container { max-width: 720px; margin: 0 auto; }
 
   /* ---- Header ---- */
   .header {
@@ -88,6 +124,22 @@
     box-shadow: var(--shadow-hover);
     transform: scale(1.06);
   }
+  /* 一键获取图标按钮 */
+  .btn-fetch-icons {
+    background: linear-gradient(135deg, var(--accent), #4a5ae0);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 12px;
+    border: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-fetch-icons:hover { opacity: 0.88; }
 
   /* ---- Search ---- */
   .search-bar {
@@ -270,6 +322,39 @@
   .nav-card.dragging {
     opacity: 0.35;
     transform: scale(0.95);
+  }
+
+  /* ---- 拖拽把手 ---- */
+  .nav-card .drag-handle {
+    position: absolute; top: 2px; left: 50%; transform: translateX(-50%);
+    font-size: 0.6rem; color: #ccc; cursor: grab; opacity: 0;
+    transition: opacity 0.2s; line-height: 1; user-select: none; letter-spacing: 2px;
+  }
+  .nav-card:hover .drag-handle { opacity: 0.6; cursor: grab; }
+  .nav-card .drag-handle:hover { opacity: 1; color: var(--accent); }
+
+  /* ---- 网络状态指示灯 ---- */
+  .nav-card .status-dot {
+    position: absolute; top: 4px; right: 6px;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #999; opacity: 0.3;
+    transition: background 0.3s, opacity 0.3s;
+  }
+  .nav-card:hover .status-dot { opacity: 0.7; }
+  .status-dot.online { background: #34c759; }
+  .status-dot.slow { background: #ff9f0a; }
+  .status-dot.offline { background: #ff3b30; }
+
+  /* ---- 分类折叠 & 加密 ---- */
+  .section-header { cursor: pointer; user-select: none; }
+  .section.collapsed .grid { display: none; }
+  .section.locked .grid { filter: blur(8px); pointer-events: none; user-select: none; position: relative; }
+  .section.locked .grid::after {
+    content: '🔒 点击标题输入密码';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-size: 0.85rem; color: var(--text-secondary);
+    background: var(--card-bg); backdrop-filter: blur(12px);
+    padding: 10px 20px; border-radius: 12px; z-index: 10; white-space: nowrap;
   }
 
   .nav-card .emoji { font-size: 1.7rem; line-height: 1; }
@@ -637,7 +722,11 @@
   <div class="header">
     <h1 id="pageTitle">🌈 我的导航</h1>
     <p id="pageSubtitle">常用网址 · 一键直达</p>
+    <div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;font-variant-numeric:tabular-nums;" id="clockDisplay"></div>
     <div class="header-actions">
+      <button class="btn-icon" id="themeBtn" onclick="toggleTheme()" title="切换主题">☀️</button>
+      <button class="btn-icon" onclick="openNotepad()" title="记事本">📝</button>
+      <button class="btn-icon" id="loginBtn" onclick="isAuthenticated?logout():login()" title="点击登录">🔒</button>
       <button class="btn-icon" onclick="showAddModal('quick')" title="添加快速链接">＋</button>
       <button class="btn-icon" onclick="openSettings()" title="管理">⚙️</button>
     </div>
@@ -650,7 +739,7 @@
       <option value="yandex">Yandex</option>
       <option value="baidu">百度</option>
     </select>
-    <input type="text" name="q" id="searchInput" placeholder="搜索一下..." autofocus>
+    <input type="text" name="q" id="searchInput" placeholder="" autofocus>
     <button type="submit">🔍</button>
   </form>
 
@@ -665,8 +754,16 @@
     <h2 id="modalTitle">添加网址</h2>
     <label for="modalSection">分类</label>
     <select id="modalSection"></select>
-    <label for="modalEmoji">图标 (Emoji)</label>
-    <input id="modalEmoji" type="text" placeholder="如：🌐 🔧 🎮" maxlength="6">
+    <label for="modalEmoji">图标</label>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:16px;">
+      <input id="modalEmoji" type="text" placeholder="Emoji 如 🌐" maxlength="6" style="flex:1;padding:11px 16px;border:1.5px solid var(--border-light);border-radius:14px;font-size:0.9rem;outline:none;background:var(--input-bg);color:var(--text);">
+      <button class="btn-icon" onclick="document.getElementById('svgUpload').click()" title="上传SVG图标" style="width:auto;border-radius:10px;padding:8px 14px;font-size:0.75rem;gap:4px;flex-shrink:0;">🖼️ SVG</button>
+      <input type="file" id="svgUpload" accept=".svg" style="display:none" onchange="handleSvgUpload(event)">
+    </div>
+    <div id="modalIconPreview" style="display:none;margin-bottom:10px;padding:8px 12px;border-radius:10px;background:var(--settings-bg);font-size:0.8rem;color:var(--text-secondary);align-items:center;gap:8px;">
+      <span>当前图标：</span><span id="modalIconPreviewContent"></span>
+      <button class="s-btn" onclick="clearIconPreview()" style="font-size:0.7rem;margin-left:auto;">✕ 清除</button>
+    </div>
     <label for="modalName">名称</label>
     <input id="modalName" type="text" placeholder="给个名字">
     <label for="modalUrl">网址</label>
@@ -699,6 +796,16 @@
           <label>副标题</label>
           <input id="settingsSubtitle" type="text" onchange="data.subtitle=this.value">
         </div>
+        <div style="margin-top:20px;padding-top:16px;border-top:1.5px solid var(--divider);">
+          <label style="display:block;font-size:0.78rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;">🔑 修改密码</label>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <input type="password" id="oldPwdInput" placeholder="当前密码" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-light);border-radius:12px;font-size:0.85rem;outline:none;background:var(--input-bg);color:var(--text);">
+            <input type="password" id="newPwdInput" placeholder="新密码" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-light);border-radius:12px;font-size:0.85rem;outline:none;background:var(--input-bg);color:var(--text);">
+            <input type="password" id="confirmPwdInput" placeholder="确认新密码" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-light);border-radius:12px;font-size:0.85rem;outline:none;background:var(--input-bg);color:var(--text);">
+            <div id="pwdChangeMsg" style="font-size:0.8rem;min-height:20px;color:#ef4444;"></div>
+            <button class="btn-icon" onclick="changePasswordInline()" style="width:auto;border-radius:12px;padding:8px 20px;gap:5px;font-size:0.82rem;background:var(--accent);color:#fff;border:none;font-weight:600;">确认修改</button>
+          </div>
+        </div>
       </div>
       <div id="panelSections" class="settings-panel">
         <div class="section-actions">
@@ -727,7 +834,7 @@
 <div id="trashZone" class="trash-zone">🗑️ 拖到这里删除</div>
 
 <script>
-const STORAGE_KEY = 'my_nav_data';
+const STORAGE_KEY = 'my_nav_data_v2';
 
 const DEFAULT_DATA = {
   title: '🌈 我的导航',
@@ -770,6 +877,7 @@ const DEFAULT_DATA = {
         { emoji: '🛠️', name: 'KuKuTool', url: 'https://dy.kukutool.com' },
         { emoji: '🧰', name: '刘明野工具箱', url: 'https://tool.liumingye.cn' },
         { emoji: '☁️', name: '良心云', url: 'https://xn--9kqz23b19z.com/#/dashboard' },
+        { emoji: '☁️', name: '嗨云', url: 'https://cloud.hysoon.com/account/logon?fromUrl=/fkdevice/index' },
         { emoji: '🏠', name: '青禾导航', url: 'https://www.qinghedaohang.com' }
       ]
     },
@@ -782,6 +890,17 @@ const DEFAULT_DATA = {
         { emoji: '🧠', name: 'DeepSeek平台', url: 'https://platform.deepseek.com/api_keys' },
         { emoji: '📊', name: 'DeepSeek用量', url: 'https://platform.deepseek.com/usage' },
         { emoji: '🎵', name: 'Apple Music', url: 'https://music.apple.com/cn/library/songs' }
+      ]
+    },
+    {
+      id: 'pn',
+      name: '🔞 PN',
+      cssClass: 'section-pn',
+      links: [
+        { emoji: '🎬', name: 'GGJAV', url: 'https://ggjav.com/member/login?redirect=/main/my_list' },
+        { emoji: '🔞', name: '91CG', url: 'https://91cg8.com/' },
+        { emoji: '📺', name: 'PornHub', url: 'https://www.pornhub.com' },
+        { emoji: '🐦', name: 'X', url: 'https://x.com' }
       ]
     },
     {
@@ -876,16 +995,17 @@ function render() {
       `<a class="nav-card" href="${l.url}" target="_blank" draggable="true"
           data-type="card" data-si="${si}" data-li="${li}"
           ondragstart="onDragStart(event)" ondragend="onDragEnd(event)">
-        <span class="emoji">${l.emoji}</span>
+        <span class="emoji">${l.emojiType === 'svg' ? '<img src="' + l.emoji + '" style="width:26px;height:26px;border-radius:4px;">' : l.emoji}</span>
+        <span class="status-dot" data-url="${l.url}"></span>
         <span class="label">${l.name}</span>
       </a>`
     ).join('');
     return `
-      <div class="section ${s.cssClass || ''}" data-si="${si}"
+      <div class="section ${s.cssClass || ''}${s.password ? ' locked' : ''}" data-si="${si}"
            ondragover="onDragOverSection(event)" ondrop="onDropSection(event)" ondragleave="onDragLeaveSection(event)">
         <div class="section-header">
           <span class="section-title">${s.name}</span>
-          <button class="btn-add-link" onclick="showAddModal('${s.id}')">＋</button>
+          <button class="btn-add-link" onclick="event.stopPropagation();showAddModal('${s.id}')">＋</button>
         </div>
         <div class="grid">${linksHtml}</div>
       </div>
@@ -895,14 +1015,49 @@ function render() {
 
 // ===== 添加 / 编辑 =====
 let modalMode = null;
+let modalSvgData = null;
+
+function handleSvgUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    modalSvgData = ev.target.result;
+    document.getElementById('modalIconPreview').style.display = 'flex';
+    document.getElementById('modalIconPreviewContent').innerHTML = `<img src="${modalSvgData}" style="height:24px;width:24px;">`;
+    document.getElementById('modalEmoji').value = '__svg__';
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearIconPreview() {
+  modalSvgData = null;
+  document.getElementById('modalIconPreview').style.display = 'none';
+  document.getElementById('modalEmoji').value = '';
+  document.getElementById('svgUpload').value = '';
+}
+
+function getIconFromModal() {
+  const emoji = document.getElementById('modalEmoji').value.trim();
+  if (emoji === '__svg__' && modalSvgData) return modalSvgData;
+  return emoji || '🔗';
+}
+
+function getIconType(val) {
+  if (val && val.startsWith('data:image/svg+xml')) return 'svgdata';
+  return 'emoji';
+}
 
 function showAddModal(target) {
   modalMode = null;
+  modalSvgData = null;
+  document.getElementById('modalIconPreview').style.display = 'none';
   modalMode = target;
   document.getElementById('modalTitle').textContent = '添加网址';
   document.getElementById('modalEmoji').value = '';
   document.getElementById('modalName').value = '';
   document.getElementById('modalUrl').value = '';
+  document.getElementById('svgUpload').value = '';
 
   const sel = document.getElementById('modalSection');
   sel.innerHTML = '<option value="__quick__">快速链接栏</option>' +
@@ -943,11 +1098,13 @@ function confirmModal() {
   }
 
   const sectionId = document.getElementById('modalSection').value;
+  const newItem = { emoji, name, url };
+  if (getIconType(emoji) === 'svgdata') newItem.emojiType = 'svg';
   if (sectionId === '__quick__') {
     data.quickLinks.push({ icon: 'svg', name, url });
   } else {
     const s = data.sections.find(x => x.id === sectionId);
-    if (s) s.links.push({ emoji, name, url });
+    if (s) s.links.push(newItem);
   }
   saveData();
   render();
@@ -985,12 +1142,33 @@ function renderSettingsSections() {
   const list = document.getElementById('settingsSectionList');
   list.innerHTML = data.sections.map((s, i) => `
     <div class="settings-item">
+      <button class="s-btn" onclick="moveSection(${i},-1)" style="font-size:0.75rem;padding:2px 8px;" ${i===0?'disabled':''}>▲</button>
+      <button class="s-btn" onclick="moveSection(${i},1)" style="font-size:0.75rem;padding:2px 8px;" ${i===data.sections.length-1?'disabled':''}>▼</button>
       <span class="s-name">${s.name}</span>
       <input type="text" value="${s.cssClass || ''}" placeholder="class" style="width:90px;padding:4px 8px;border:1px solid #e6e3ef;border-radius:8px;font-size:0.75rem;" onchange="data.sections[${i}].cssClass=this.value">
       <button class="s-btn" onclick="renameSection(${i})">✏️</button>
       <button class="s-btn del" onclick="deleteSection(${i})">🗑️</button>
     </div>
   `).join('');
+  list.innerHTML += `
+    <div style="margin-top:16px;padding-top:16px;border-top:1.5px solid var(--divider);">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn-icon" onclick="exportData()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">📤 导出数据</button>
+        <button class="btn-icon" onclick="importData()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">📥 导入数据</button>
+        <button class="btn-icon" onclick="fetchAllIcons()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;background:linear-gradient(135deg,var(--accent),#4a5ae0);color:#fff;border:none;">🔄 获取图标</button>
+        <button class="btn-icon" onclick="backupToCloud()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">☁️ 云端备份</button>
+        <button class="btn-icon" onclick="restoreFromCloud()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">⬇️ 云端恢复</button>
+      </div>
+    </div>
+  `;
+}
+
+function moveSection(idx, dir) {
+  const newIdx = idx + dir;
+  if (newIdx < 0 || newIdx >= data.sections.length) return;
+  const item = data.sections.splice(idx, 1)[0];
+  data.sections.splice(newIdx, 0, item);
+  saveData(); render(); renderSettingsSections();
 }
 
 function renderSettingsQuick() {
@@ -1004,6 +1182,17 @@ function renderSettingsQuick() {
       <button class="s-btn del" onclick="deleteQuickLink(${i})">🗑️</button>
     </div>
   `).join('');
+  list.innerHTML += `
+    <div style="margin-top:16px;padding-top:16px;border-top:1.5px solid var(--divider);">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn-icon" onclick="exportData()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">📤 导出数据</button>
+        <button class="btn-icon" onclick="importData()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">📥 导入数据</button>
+        <button class="btn-icon" onclick="fetchAllIcons()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;background:linear-gradient(135deg,var(--accent),#4a5ae0);color:#fff;border:none;">🔄 获取图标</button>
+        <button class="btn-icon" onclick="backupToCloud()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">☁️ 云端备份</button>
+        <button class="btn-icon" onclick="restoreFromCloud()" style="width:auto;border-radius:12px;padding:8px 16px;gap:5px;font-size:0.8rem;">⬇️ 云端恢复</button>
+      </div>
+    </div>
+  `;
 }
 
 function renameSection(idx) {
@@ -1041,8 +1230,7 @@ function deleteQuickLink(idx) {
   renderSettingsQuick();
 }
 
-const ADMIN_PASSWORD = '8587';
-let isAuthenticated = false;
+
 
 function checkAuth(fn) {
   if (isAuthenticated) { fn(); return; }
@@ -1085,13 +1273,38 @@ sel.onchange = function() {
   document.getElementById('searchInput').focus();
 };
 
-// 提交后清空输入框
 form.onsubmit = function() {
-  setTimeout(function() {
-    document.getElementById('searchInput').value = '';
-  }, 100);
+  const val = document.getElementById('searchInput').value.trim();
+  const quickMap = {
+    'g ': 'google', 'gg ': 'google',
+    'b ': 'baidu', 'bd ': 'baidu',
+    'y ': 'yandex', 'ya ': 'yandex',
+    'bi ': 'bing'
+  };
+  for (const [prefix, engine] of Object.entries(quickMap)) {
+    if (val.startsWith(prefix)) {
+      document.getElementById('searchInput').value = val.slice(prefix.length);
+      form.action = SEARCH_URLS[engine];
+      sel.value = engine;
+      try { localStorage.setItem('search_engine', engine); } catch(e) {}
+      setTimeout(() => { document.getElementById('searchInput').value = ''; }, 100);
+      return true;
+    }
+  }
+  setTimeout(() => { document.getElementById('searchInput').value = ''; }, 100);
 };
 })();
+
+// ===== 快捷键 =====
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey && e.key === 'k') || (!e.ctrlKey && !e.metaKey && e.key === '/' && !e.target.closest('input,select,textarea'))) {
+    e.preventDefault();
+    document.getElementById('searchInput').focus();
+  }
+  if (e.key === 'Escape') {
+    closeCtxMenu();
+  }
+});
 
 // ===== 右键菜单 =====
 let ctxTarget = null;
@@ -1191,7 +1404,7 @@ function showCtxMenu(x, y, items) {
           const idx2 = parseInt(target) - 1;
           if (idx2 >= 0 && idx2 < data.sections.length) {
             data.quickLinks.splice(ctxTarget.linkIdx, 1);
-            data.sections[idx2].links.push({ emoji: '🔗', name: l.name, url: l.url });
+            data.sections[idx2].links.push({ emoji: guessEmoji(l.name, l.url), name: l.name, url: l.url });
             saveData(); render();
           }
         }
@@ -1217,8 +1430,17 @@ function ctxEdit() {
     const s = data.sections[ctxTarget.sectionIdx];
     const l = s.links[ctxTarget.linkIdx];
     modalMode = ctxTarget;
+    modalSvgData = null;
     document.getElementById('modalTitle').textContent = '编辑网址';
-    document.getElementById('modalEmoji').value = l.emoji;
+    document.getElementById('modalIconPreview').style.display = 'none';
+    if (l.emojiType === 'svg') {
+      document.getElementById('modalEmoji').value = '__svg__';
+      modalSvgData = l.emoji;
+      document.getElementById('modalIconPreview').style.display = 'flex';
+      document.getElementById('modalIconPreviewContent').innerHTML = '<img src="' + l.emoji + '" style="height:24px;width:24px;">';
+    } else {
+      document.getElementById('modalEmoji').value = l.emoji;
+    }
     document.getElementById('modalName').value = l.name;
     document.getElementById('modalUrl').value = l.url;
     const sel = document.getElementById('modalSection');
@@ -1404,7 +1626,7 @@ function onDropSection(e) {
     data.quickLinks.splice(dragData.idx, 1);
     const grid = section.querySelector('.grid');
     const dropIdx = getDropIndex(grid, e.clientY, '.nav-card');
-    data.sections[targetSi].links.splice(dropIdx, 0, { emoji: '🔗', name: link.name, url: link.url });
+    data.sections[targetSi].links.splice(dropIdx, 0, { emoji: guessEmoji(link.name, link.url), name: link.name, url: link.url });
   }
 
   section.classList.remove('drag-hover');
@@ -1444,8 +1666,435 @@ document.addEventListener('drop', function(e) {
   trash.classList.remove('show', 'drag-over');
 });
 
+
+// ===== 密码登录系统 =====
+const ADMIN_PASSWORD_KEY = 'nav_admin_password';
+let ADMIN_PASSWORD = localStorage.getItem(ADMIN_PASSWORD_KEY) || '8587';
+let isAuthenticated = false;
+let pwdCallback = null;
+
+function checkAuth(fn) {
+  if (isAuthenticated) { fn(); return; }
+  pwdCallback = fn;
+  document.getElementById('pwdTitle').textContent = '🔒 请输入管理员密码';
+  document.getElementById('pwdInput').value = '';
+  document.getElementById('pwdError').style.opacity = '0';
+  document.getElementById('pwdInput').style.borderColor = 'var(--border-light)';
+  document.getElementById('pwdOverlay').classList.add('show');
+  setTimeout(() => document.getElementById('pwdInput').focus(), 100);
+}
+
+function submitPwd() {
+  const pwd = document.getElementById('pwdInput').value;
+  if (pwd === ADMIN_PASSWORD) {
+    isAuthenticated = true;
+    localStorage.setItem('nav_auth_session', '1');
+    const btn = document.getElementById('loginBtn');
+    if (btn) { btn.textContent = '🔓'; btn.title = '已登录'; }
+    document.getElementById('pwdOverlay').classList.remove('show');
+    if (pwdCallback) { pwdCallback(); pwdCallback = null; }
+  } else {
+    document.getElementById('pwdInput').style.borderColor = '#ef4444';
+    document.getElementById('pwdError').style.opacity = '1';
+    document.getElementById('pwdInput').value = '';
+    document.getElementById('pwdInput').focus();
+  }
+}
+
+function closePwdModal(ev) {
+  if (ev && ev.target !== document.getElementById('pwdOverlay')) return;
+  document.getElementById('pwdOverlay').classList.remove('show');
+  document.getElementById('pwdError').style.opacity = '0';
+  document.getElementById('pwdInput').style.borderColor = 'var(--border-light)';
+  pwdCallback = null;
+}
+
+function login() { checkAuth(function(){}); }
+
+function logout() {
+  isAuthenticated = false;
+  localStorage.removeItem('nav_auth_session');
+  document.getElementById('loginBtn').textContent = '🔒';
+  document.getElementById('loginBtn').title = '点击登录';
+}
+
+function changePasswordInline() {
+  const old = document.getElementById('oldPwdInput').value;
+  const n1 = document.getElementById('newPwdInput').value;
+  const n2 = document.getElementById('confirmPwdInput').value;
+  const msg = document.getElementById('pwdChangeMsg');
+  if (old !== ADMIN_PASSWORD) { msg.textContent = '❌ 当前密码错误'; showToast('当前密码错误','error'); document.getElementById('oldPwdInput').style.borderColor = '#ef4444'; return; }
+  if (!n1) { msg.textContent = '❌ 请输入新密码'; showToast('请输入新密码','error'); document.getElementById('newPwdInput').style.borderColor = '#ef4444'; return; }
+  if (n1 !== n2) { msg.textContent = '❌ 两次输入不一致'; showToast('两次输入不一致','error'); document.getElementById('confirmPwdInput').style.borderColor = '#ef4444'; return; }
+  ADMIN_PASSWORD = n1;
+  localStorage.setItem(ADMIN_PASSWORD_KEY, n1);
+  msg.textContent = '✅ 密码修改成功！';
+  showToast('✅ 密码修改成功','success');
+  document.getElementById('oldPwdInput').value = '';
+  document.getElementById('newPwdInput').value = '';
+  document.getElementById('confirmPwdInput').value = '';
+  document.getElementById('oldPwdInput').style.borderColor = '';
+  document.getElementById('newPwdInput').style.borderColor = '';
+  document.getElementById('confirmPwdInput').style.borderColor = '';
+  setTimeout(() => { msg.textContent = ''; }, 3000);
+}
+
+// Toast 提示
+function showToast(text, type) {
+  const t = document.createElement('div');
+  t.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:9999;padding:12px 24px;border-radius:14px;font-size:0.85rem;font-weight:500;box-shadow:0 4px 20px rgba(0,0,0,0.1);animation:fadeIn 0.2s ease;color:#fff;';
+  t.style.background = type === 'error' ? '#ef4444' : '#10b981';
+  t.textContent = text;
+  document.body.appendChild(t);
+  setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity 0.3s'; setTimeout(() => t.remove(), 300); }, 2000);
+}
+
+// 恢复登录状态
+if (localStorage.getItem('nav_auth_session') === '1') {
+  isAuthenticated = true;
+  const btn = document.getElementById('loginBtn');
+  if (btn) { btn.textContent = '🔓'; btn.title = '已登录'; }
+}
+
+
+function guessEmoji(name, url) {
+  const nameMap = {
+    '百度': '🅱️', 'Google': '🅶', 'GitHub': '🐙', '微博': '📱', '知乎': '💡',
+    'B站': '📺', '小红书': '📕', '189邮箱': '📧', '青柠': '🍋', 'DeepSeek': '🧠',
+    'Hermes': '🤖', 'Yandex': '🇾', '126邮箱': '📧', '青禾导航': '🏠',
+    'SeedHub': '🌰', 'YouTube': '▶️', '游戏下载': '🎮', '夸克网盘': '📦',
+    'GGJAV': '🎬', '91CG': '🔞', 'PornHub': '📺', 'X': '🐦',
+    '抖音': '🎵', 'Apple Music': '🎵', '低端影视': '🎥', '网飞猫': '🐱',
+    '剧OK': '🎬', '51吃瓜': '🍉', 'Lemon Live': '🍋', '云影': '☁️',
+    '免费影视': '🆓', '听友FM': '🎧', 'KuKuTool': '🛠️', '刘明野工具箱': '🧰',
+    '良心云': '☁️', '养殖OA': '⚡', '集团OA': '🏢', 'NCC': '💻',
+    'Hermes Agent': '🤖', '嗨云': '☁️', '游戏下载吧': '🎮'
+  };
+  if (nameMap[name]) return nameMap[name];
+  if (!url) return '🌐';
+  const u = url.toLowerCase();
+  if (u.includes('google')) return '🅶';
+  if (u.includes('youtube')) return '▶️';
+  if (u.includes('github')) return '🐙';
+  if (u.includes('bilibili')) return '📺';
+  if (u.includes('zhihu')) return '💡';
+  if (u.includes('weibo')) return '📱';
+  if (u.includes('xiaohongshu')) return '📕';
+  if (u.includes('douyin')) return '🎵';
+  if (u.includes('baidu')) return '🅱️';
+  if (u.includes('bing')) return '🅱️';
+  if (u.includes('yandex')) return '🇾';
+  if (u.includes('pornhub') || u.includes('91cg') || u.includes('ggjav')) return '🔞';
+  if (u.includes('x.com')) return '🐦';
+  if (u.includes('apple')) return '🎵';
+  if (u.includes('quark') || u.includes('pan')) return '📦';
+  if (u.includes('hysoon') || u.includes('cloud')) return '☁️';
+  return '🌐';
+}
+
+// ===== 分类折叠 & 加密 =====
+document.addEventListener('click', function(e) {
+  const header = e.target.closest('.section-header');
+  if (!header) return;
+  const section = header.closest('.section');
+  if (!section) return;
+  const si = parseInt(section.dataset.si);
+  const secData = data.sections[si];
+  if (!secData) return;
+  if (secData.password && section.classList.contains('locked')) {
+    if (isAuthenticated) {
+      section.classList.remove('locked');
+      section.classList.toggle('collapsed');
+    } else {
+      checkAuth(function() { section.classList.remove('locked'); section.classList.toggle('collapsed'); });
+    }
+    return;
+  }
+  if (secData.password && !section.classList.contains('locked')) {
+    section.classList.toggle('collapsed');
+    return;
+  }
+  section.classList.toggle('collapsed');
+});
+
+// ===== 分类排序（设置里） =====
+function moveSection(idx, dir) {
+  const newIdx = idx + dir;
+  if (newIdx < 0 || newIdx >= data.sections.length) return;
+  const item = data.sections.splice(idx, 1)[0];
+  data.sections.splice(newIdx, 0, item);
+  saveData();
+  render();
+  renderSettingsSections();
+}
+
+// ===== 数据导出/导入 =====
+function exportData() {
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '导航数据备份_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function importData() {
+  const inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = '.json';
+  inp.onchange = function(ev) {
+    const file = ev.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev2) {
+      try {
+        const imported = JSON.parse(ev2.target.result);
+        if (!imported.sections || !imported.quickLinks) { alert('文件格式不正确'); return; }
+        if (confirm('确定导入？当前数据将被覆盖！')) { data = imported; saveData(); render(); alert('导入成功！'); }
+      } catch(err) { alert('文件解析失败：' + err.message); }
+    };
+    reader.readAsText(file);
+  };
+  inp.click();
+}
+
+// ===== 一键获取网站图标 =====
+function fetchAllIcons() {
+  if (!confirm('将自动从所有网址抓取官方图标，覆盖现有 Emoji？')) return;
+  let total = 0;
+  const processList = [];
+
+  data.sections.forEach(s => {
+    s.links.forEach(l => {
+      if (!l.url) return;
+      total++;
+      processList.push({ item: l });
+    });
+  });
+
+  if (total === 0) { showToast('没有要处理的网址', 'error'); return; }
+
+  // 创建进度弹窗
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:9999;display:flex;align-items:center;justify-content:center;';
+  overlay.innerHTML = '<div style="background:var(--modal-bg);border-radius:20px;padding:28px 36px;min-width:320px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.15);animation:popIn 0.2s ease;">' +
+    '<div style="font-size:0.9rem;font-weight:600;color:var(--text);margin-bottom:12px;">🔄 正在获取图标</div>' +
+    '<div id="fetchProgress" style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:16px;">准备中...</div>' +
+    '<div style="width:100%;height:6px;background:var(--border-light);border-radius:4px;overflow:hidden;">' +
+    '<div id="fetchBar" style="width:0%;height:100%;background:linear-gradient(90deg,var(--accent),#4a5ae0);border-radius:4px;transition:width 0.3s;"></div></div>' +
+    '<div style="margin-top:12px;font-size:0.75rem;color:var(--text-secondary);" id="fetchDetail"></div></div>';
+  document.body.appendChild(overlay);
+
+  let done = 0;
+  let success = 0;
+
+  function updateProgress() {
+    const pct = Math.round((done / total) * 100);
+    document.getElementById('fetchBar').style.width = pct + '%';
+    document.getElementById('fetchProgress').textContent = '进度：' + done + '/' + total + '（成功 ' + success + ' 个）';
+  }
+
+  function processNext() {
+    if (processList.length === 0) {
+      document.getElementById('fetchProgress').textContent = '✅ 完成！成功获取 ' + success + '/' + total + ' 个图标';
+      document.getElementById('fetchDetail').textContent = '';
+      overlay.onclick = function() { overlay.remove(); saveData(); render(); };
+      setTimeout(() => { overlay.remove(); saveData(); render(); }, 2000);
+      return;
+    }
+    const { item } = processList.shift();
+    const name = item.name || '未知';
+    document.getElementById('fetchDetail').textContent = '正在获取：' + name;
+
+    const img = new Image();
+    let used = false;
+    const timeout = setTimeout(() => {
+      if (!used) { used = true; done++; updateProgress(); processNext(); }
+    }, 3000);
+
+    try {
+      const u = new URL(item.url);
+      // 依次尝试多个可能的 favicon 路径
+      const paths = [
+        u.origin + '/favicon.ico',
+        u.origin + '/favicon.png',
+        u.origin + '/apple-touch-icon.png',
+        u.origin + '/apple-touch-icon-precomposed.png',
+        u.origin + '/assets/favicon.ico',
+        u.origin + '/static/favicon.ico',
+        u.origin + '/favicon.svg',
+        'https://www.google.com/s2/favicons?domain=' + u.origin + '&sz=32',
+        'https://icon.horse/icon/' + u.origin,
+      ];
+      let pathIdx = 0;
+
+      function tryPath() {
+        if (pathIdx >= paths.length) {
+          if (!used) { used = true; clearTimeout(timeout); done++; updateProgress(); processNext(); }
+          return;
+        }
+        img.src = paths[pathIdx] + '?_=' + Date.now();
+        pathIdx++;
+      }
+
+      img.crossOrigin = 'anonymous';
+      img.onload = function() {
+        if (used) return; used = true; clearTimeout(timeout);
+        const c = document.createElement('canvas');
+        c.width = img.width || 32; c.height = img.height || 32;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        const dataUrl = c.toDataURL('image/png');
+        // 排除 1x1 的空白图标
+        if (dataUrl && dataUrl.length < 50000 && img.width > 1 && img.height > 1) {
+          item.emoji = dataUrl;
+          item.emojiType = 'svg';
+          success++;
+        }
+        done++; updateProgress(); processNext();
+      };
+      img.onerror = function() {
+        if (used) return;
+        // 尝试下一个路径
+        tryPath();
+      };
+      tryPath();
+    } catch(e) {
+      if (!used) { used = true; clearTimeout(timeout); done++; updateProgress(); processNext(); }
+    }
+  }
+
+  updateProgress();
+  processNext();
+}
+
+// ===== 云端备份（GitHub Gist）=====
+function backupToCloud() {
+  checkAuth(function() {
+    const token2 = prompt('请输入 GitHub Token（需要 gist 权限）：');
+    if (!token2) return;
+    const json = JSON.stringify(data, null, 2);
+    const filename = 'nav-data-' + new Date().toISOString().slice(0,10) + '.json';
+    fetch('https://api.github.com/gists', {
+      headers: {'Authorization': 'token ' + token2, 'Accept': 'application/vnd.github.v3+json'}
+    }).then(r => r.json()).then(gists => {
+      const existing = Array.isArray(gists) ? gists.find(g => Object.keys(g.files||{}).some(fn => fn.startsWith('nav-data-'))) : null;
+      const files = {}; files[filename] = { content: json };
+      if (existing) {
+        return fetch(existing.url, { method: 'PATCH', headers: {'Authorization': 'token ' + token2, 'Content-Type': 'application/json'}, body: JSON.stringify({ files }) }).then(r => r.json());
+      } else {
+        return fetch('https://api.github.com/gists', { method: 'POST', headers: {'Authorization': 'token ' + token2, 'Content-Type': 'application/json'}, body: JSON.stringify({ description: '导航数据备份', public: false, files }) }).then(r => r.json());
+      }
+    }).then(result => {
+      if (result.html_url) { alert('备份成功！'); localStorage.setItem('nav_gist_url', result.html_url); }
+      else { alert('备份失败：' + (result.message || '未知错误')); }
+    }).catch(err => alert('网络错误：' + err.message));
+  });
+}
+
+function restoreFromCloud() {
+  checkAuth(function() {
+    const token2 = prompt('请输入 GitHub Token：');
+    if (!token2) return;
+    const gistUrl = localStorage.getItem('nav_gist_url');
+    if (!gistUrl) { alert('没有找到备份记录'); return; }
+    fetch('https://api.github.com/gists/' + gistUrl.split('/').pop(), {
+      headers: {'Authorization': 'token ' + token2, 'Accept': 'application/vnd.github.v3+json'}
+    }).then(r => r.json()).then(gist => {
+      const fc = Object.values(gist.files || {})[0];
+      if (!fc) { alert('Gist 中没有数据'); return; }
+      const imported = JSON.parse(fc.content);
+      if (confirm('确定从云端恢复？当前数据将被覆盖！')) { data = imported; saveData(); render(); alert('恢复成功！'); }
+    }).catch(err => alert('恢复失败：' + err.message));
+  });
+}
+
+// ===== 记事本 =====
+const NOTEPAD_KEY = 'nav_notepad_content';
+
+function openNotepad() {
+  if (!isAuthenticated) { checkAuth(function(){ _openNotepad(); }); } else { _openNotepad(); }
+}
+function _openNotepad() {
+  document.getElementById('notepadContent').value = localStorage.getItem(NOTEPAD_KEY) || '';
+  updateNotepadWordCount();
+  document.getElementById('notepadOverlay').classList.add('show');
+  document.getElementById('notepadContent').focus();
+}
+function closeNotepad(ev) {
+  if (ev && ev.target !== document.getElementById('notepadOverlay')) return;
+  saveNotepad();
+  document.getElementById('notepadOverlay').classList.remove('show');
+}
+function saveNotepad() { localStorage.setItem(NOTEPAD_KEY, document.getElementById('notepadContent').value); updateNotepadWordCount(); showToast('已保存','success'); }
+function updateNotepadWordCount() { document.getElementById('notepadWordCount').textContent = document.getElementById('notepadContent').value.length + ' 字'; }
+function exportNotepad() {
+  const blob = new Blob([document.getElementById('notepadContent').value], {type: 'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '记事本_' + new Date().toISOString().slice(0,10) + '.txt';
+  a.click(); URL.revokeObjectURL(a.href);
+}
+function importNotepad() {
+  const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.txt,.md';
+  inp.onchange = function(ev) {
+    const file = ev.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev2) { document.getElementById('notepadContent').value = ev2.target.result; updateNotepadWordCount(); };
+    reader.readAsText(file);
+  };
+  inp.click();
+}
+document.addEventListener('input', function(e) { if (e.target.id === 'notepadContent') updateNotepadWordCount(); });
+
+// ===== 卡片拖拽排序（鼠标事件）=====
+// ===== 网络状态检测 =====
+function checkAllSites() {
+  document.querySelectorAll('.status-dot').forEach(dot => {
+    const url = dot.dataset.url;
+    if (!url) return;
+    const start = Date.now();
+    const img = new Image();
+    img.onload = function() { dot.className = 'status-dot ' + (Date.now() - start < 3000 ? 'online' : 'slow'); };
+    img.onerror = function() { dot.className = 'status-dot offline'; };
+    try { const u = new URL(url); img.src = u.origin + '/favicon.ico?_=' + Date.now(); }
+    catch(e) { dot.className = 'status-dot offline'; }
+    setTimeout(() => { if (!img.complete) dot.className = 'status-dot slow'; }, 3000);
+  });
+}
+
 // ===== 启动 =====
 render();
+setTimeout(checkAllSites, 500);
+setInterval(checkAllSites, 60000);
+render();
+
+// 主题切换
+function toggleTheme() {
+  document.body.classList.toggle('dark-mode');
+  document.getElementById('themeBtn').textContent = document.body.classList.contains('dark-mode') ? '🌙' : '☀️';
+  localStorage.setItem('nav_theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+}
+if (localStorage.getItem('nav_theme') === 'dark') {
+  document.body.classList.add('dark-mode');
+  document.getElementById('themeBtn').textContent = '🌙';
+}
+
+// 北京时间
+function updateClock() {
+  const now = new Date();
+  const bj = new Date(now.toLocaleString('en-US', {timeZone: 'Asia/Shanghai'}));
+  const y = bj.getFullYear();
+  const m = String(bj.getMonth()+1).padStart(2,'0');
+  const d = String(bj.getDate()).padStart(2,'0');
+  const w = ['日','一','二','三','四','五','六'][bj.getDay()];
+  const h = String(bj.getHours()).padStart(2,'0');
+  const min = String(bj.getMinutes()).padStart(2,'0');
+  const s = String(bj.getSeconds()).padStart(2,'0');
+  document.getElementById('clockDisplay').textContent = `${y}年${m}月${d}日 周${w} ${h}:${min}:${s}`;
+}
+updateClock();
+setInterval(updateClock, 1000);
 
 // Shift + 双击标题重置
 document.getElementById('pageTitle').ondblclick = function(e) {
@@ -1457,5 +2106,40 @@ document.getElementById('pageTitle').ondblclick = function(e) {
   }
 };
 </script>
+
+<!-- ===== 密码输入弹窗 ===== -->
+<div id="pwdOverlay" class="modal-overlay" onclick="closePwdModal(event)">
+  <div class="modal" onclick="event.stopPropagation()" style="max-width:360px;text-align:center;">
+    <h2 id="pwdTitle" style="font-size:1.1rem;margin-bottom:16px;color:var(--text);font-weight:650;">🔒 请输入管理员密码</h2>
+    <input type="password" id="pwdInput" placeholder="输入密码"
+      style="width:100%;padding:12px 16px;border:2px solid var(--border-light);border-radius:14px;font-size:1rem;outline:none;background:var(--input-bg);color:var(--text);text-align:center;transition:border-color 0.2s;"
+      onkeydown="if(event.key==='Enter')submitPwd()" oninput="this.style.borderColor='var(--border-light)'">
+    <div id="pwdError" style="font-size:0.8rem;color:#ef4444;margin-top:8px;min-height:20px;opacity:0;transition:opacity 0.2s;">密码错误</div>
+    <div class="modal-actions" style="justify-content:center;margin-top:16px;">
+      <button class="btn-cancel" onclick="closePwdModal()">取消</button>
+      <button class="btn-confirm" onclick="submitPwd()">确定</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 记事本弹窗 ===== -->
+<div id="notepadOverlay" class="modal-overlay" onclick="closeNotepad(event)">
+  <div class="modal" onclick="event.stopPropagation()" style="max-width:600px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <h2 style="font-size:1.1rem;color:var(--text);font-weight:650;margin:0;">📝 记事本</h2>
+      <div style="display:flex;gap:6px;">
+        <button class="btn-icon" onclick="saveNotepad()" title="保存" style="width:auto;border-radius:10px;padding:6px 14px;font-size:0.75rem;gap:4px;">💾 保存</button>
+        <button class="btn-icon" onclick="exportNotepad()" title="导出" style="width:auto;border-radius:10px;padding:6px 14px;font-size:0.75rem;gap:4px;">📤</button>
+        <button class="btn-icon" onclick="importNotepad()" title="导入" style="width:auto;border-radius:10px;padding:6px 14px;font-size:0.75rem;gap:4px;">📥</button>
+      </div>
+    </div>
+    <textarea id="notepadContent" style="width:100%;height:50vh;min-height:300px;padding:16px;border:1.5px solid var(--border-light);border-radius:14px;font-size:0.9rem;line-height:1.7;outline:none;background:var(--input-bg);color:var(--text);resize:vertical;font-family:inherit;" placeholder="在这里写笔记..."></textarea>
+    <div class="modal-actions" style="margin-top:12px;">
+      <span style="font-size:0.75rem;color:var(--text-secondary);" id="notepadWordCount">0 字</span>
+      <button class="btn-cancel" onclick="closeNotepad()">关闭</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
