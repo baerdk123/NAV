@@ -909,9 +909,8 @@
         </div>
         <div class="settings-field">
           <label>☁️ 云同步</label>
-          <div style="margin-top:6px;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:8px;">
-            <span id="cloudDisplay" style="display:flex;align-items:center;gap:4px;">🔄 打开页面时自动拉取 · 保存时自动推送</span>
-            <button onclick="manualPullCloud()" style="padding:4px 12px;border-radius:8px;border:1px solid var(--border-light);background:var(--input-bg);color:var(--text);font-size:0.75rem;cursor:pointer;">手动拉取</button>
+          <div style="margin-top:6px;font-size:0.82rem;color:var(--text-secondary);display:flex;align-items:center;gap:4px;">
+            <span id="cloudDisplay">🔄 打开页面时自动拉取 · 保存时自动推送</span>
           </div>
         </div>
       </div>
@@ -1203,7 +1202,36 @@ function restoreFromCloudAuto(callback) {
 
 function saveData() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  saveBackup(JSON.stringify(data));
   syncDataToCloud();
+}
+
+// ===== IndexedDB 冷备份（localStorage 被清时的最后防线） =====
+var DB_NAME = 'nav_backup', DB_VER = 1, DB_STORE = 'data';
+function openDB() {
+  return new Promise(function(resolve, reject) {
+    var req = indexedDB.open(DB_NAME, DB_VER);
+    req.onupgradeneeded = function(e) {
+      var db = e.target.result;
+      if (!db.objectStoreNames.contains(DB_STORE)) db.createObjectStore(DB_STORE);
+    };
+    req.onsuccess = function(e) { resolve(e.target.result); };
+    req.onerror = function() { reject(req.error); };
+  });
+}
+function saveBackup(json) {
+  openDB().then(function(db) {
+    var tx = db.transaction(DB_STORE, 'readwrite');
+    tx.objectStore(DB_STORE).put(json, 'nav_data');
+  }).catch(function(){});
+}
+function loadBackup(callback) {
+  openDB().then(function(db) {
+    var tx = db.transaction(DB_STORE, 'readonly');
+    var req = tx.objectStore(DB_STORE).get('nav_data');
+    req.onsuccess = function() { callback && callback(req.result || null); };
+    req.onerror = function() { callback && callback(null); };
+  }).catch(function(){ callback && callback(null); });
 }
 
 // 页面宽度设置
@@ -2856,49 +2884,44 @@ function stopParticles() {
 }
 
 // ===== 启动 =====
-// 先隐藏主体，等云端数据到了再渲染（避免闪旧版）
+// 先隐藏主体，等数据就绪再渲染（避免闪旧版）
 document.getElementById('container').style.opacity = '0';
 document.getElementById('container').style.transition = 'opacity 0.3s';
-restoreFromCloudAuto(function() {
-  render();
-  updateLockBtn();
-  document.getElementById('container').style.opacity = '1';
+
+// 优先从 localStorage 读，没有的话从 IndexedDB 恢复
+function boot() {
+  var localRaw = localStorage.getItem(STORAGE_KEY);
+  if (localRaw) {
+    try { data = JSON.parse(localRaw); } catch(e) {}
+  }
+  if (!data.sections) {
+    // localStorage 无效，尝试从 IndexedDB 恢复
+    loadBackup(function(backup) {
+      if (backup) {
+        try {
+          if (typeof backup === 'string') backup = JSON.parse(backup);
+          if (backup.sections) {
+            data = backup;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+          }
+        } catch(e) {}
+      }
+      finishBoot();
+    });
+  } else {
+    finishBoot();
+  }
+}
+function finishBoot() {
+  restoreFromCloudAuto(function() {
+    render();
+    updateLockBtn();
+    document.getElementById('container').style.opacity = '1';
+  });
   setTimeout(checkAllSites, 500);
   setInterval(checkAllSites, 60000);
-});
-// ===== 手动云同步 =====
-var _lastCloudData = '';
-function manualPullCloud() {
-  var config = getCloudConfig();
-  if (!config.token) { showToast('⚠️ 未配置云同步Token', 'error'); return; }
-  var btn = document.querySelector('#panelGeneral button:first-child');
-  if (btn) { btn.textContent = '⏳ 拉取中...'; btn.disabled = true; }
-  cfKvApi('GET').then(function(resp) {
-    if (resp.success && resp.result !== null) {
-      var cloudStr = typeof resp.result === 'string' ? resp.result : JSON.stringify(resp.result);
-      _lastCloudData = cloudStr;
-      var cloudData = typeof resp.result === 'string' ? JSON.parse(resp.result) : resp.result;
-      if (cloudData.sections && cloudData.quickLinks) {
-        var localStr = JSON.stringify(data);
-        if (cloudStr !== localStr) {
-          data = cloudData;
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-          render();
-          showToast('✅ 已从云端拉取最新数据', 'success');
-        } else {
-          showToast('☁️ 云端数据与本地一致', 'info');
-        }
-      }
-    } else {
-      showToast('⚠️ 拉取失败，请检查Token', 'error');
-    }
-  }).catch(function() {
-    showToast('⚠️ 网络异常，拉取失败', 'error');
-  }).finally(function() {
-    if (btn) { btn.textContent = '📥 从云拉取'; btn.disabled = false; }
-  });
 }
-
+boot();
 // 主题切换
 function toggleTheme() {
   document.body.classList.toggle('dark-mode');
