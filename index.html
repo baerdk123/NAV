@@ -913,6 +913,14 @@
             <span id="cloudDisplay">🔄 打开页面时自动拉取 · 保存时自动推送</span>
           </div>
         </div>
+        <div class="settings-field">
+          <label>💾 数据备份</label>
+          <div style="display:flex;gap:8px;margin-top:6px;">
+            <button onclick="exportData()" style="flex:1;padding:10px;border-radius:10px;border:1.5px solid var(--border-light);background:var(--input-bg);color:var(--text);font-size:0.82rem;cursor:pointer;">📥 导出到桌面</button>
+            <button onclick="document.getElementById('importFileInput').click()" style="flex:1;padding:10px;border-radius:10px;border:1.5px solid var(--accent);background:var(--accent);color:#fff;font-size:0.82rem;cursor:pointer;">📤 从文件导入</button>
+          </div>
+          <input id="importFileInput" type="file" accept=".json" style="display:none" onchange="importData(event)">
+        </div>
       </div>
       <div id="panelWallpaper" class="settings-panel">
         <div class="settings-field">
@@ -1204,6 +1212,41 @@ function saveData() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   saveBackup(JSON.stringify(data));
   syncDataToCloud();
+}
+
+// ===== 导出/导入备份 =====
+function exportData() {
+  var blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'nav-backup-' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('✅ 已导出到桌面', 'success');
+}
+function importData(e) {
+  var file = e.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      var imported = JSON.parse(ev.target.result);
+      if (!imported.sections || !imported.quickLinks) {
+        showToast('⚠️ 文件格式不对，缺少 sections 或 quickLinks', 'error');
+        return;
+      }
+      if (!confirm('确定导入？当前数据将被覆盖！')) return;
+      data = imported;
+      saveData();
+      render();
+      showToast('✅ 导入成功', 'success');
+    } catch(e) {
+      showToast('⚠️ 文件解析失败：' + e.message, 'error');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
 }
 
 // ===== IndexedDB 冷备份（localStorage 被清时的最后防线） =====
