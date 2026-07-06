@@ -812,7 +812,6 @@
     <p id="pageSubtitle">常用网址 · 一键直达</p>
     <div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;font-variant-numeric:tabular-nums;display:flex;align-items:center;justify-content:center;gap:8px;">
       <span id="clockDisplay"></span>
-      <span id="cloudStatus" style="font-size:0.7rem;opacity:0.7;"></span>
     </div>
     <div class="header-actions">
       <button class="btn-icon" id="lockBtn" onclick="togglePwdLock()" title="锁定/解锁" style="display:none;font-size:0.9rem;">🔓</button>
@@ -909,9 +908,17 @@
           </div>
         </div>
         <div class="settings-field">
-
+          <label>☁️ 云同步</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button onclick="manualPullCloud()" style="flex:1;min-width:80px;padding:10px 16px;border-radius:12px;border:1.5px solid var(--border-light);background:var(--input-bg);color:var(--text);font-size:0.82rem;cursor:pointer;transition:all var(--transition);">📥 从云拉取</button>
+            <button onclick="syncDataToCloud()" style="flex:1;min-width:80px;padding:10px 16px;border-radius:12px;border:1.5px solid var(--accent);background:var(--accent);color:#fff;font-size:0.82rem;cursor:pointer;transition:all var(--transition);">📤 推送到云</button>
+          </div>
+          <div style="margin-top:8px;font-size:0.75rem;color:var(--text-secondary);display:flex;align-items:center;gap:6px;">
+            <span id="cloudStatus" style="font-size:0.7rem;"></span>
+            <span id="cloudInfo">手动同步，不消耗额外配额</span>
+          </div>
+        </div>
       </div>
-    </div>
       <div id="panelWallpaper" class="settings-panel">
         <div class="settings-field">
           <label>🖼 壁纸</label>
@@ -2863,35 +2870,38 @@ restoreFromCloudAuto(function() {
   setTimeout(checkAllSites, 500);
   setInterval(checkAllSites, 60000);
 });
-// 每60秒从云端拉取最新数据，实现多设备自动同步
+// ===== 手动云同步 =====
 var _lastCloudData = '';
-function pollCloudSync() {
+function manualPullCloud() {
   var config = getCloudConfig();
-  if (!config.token) return;
+  if (!config.token) { showToast('⚠️ 未配置云同步Token', 'error'); return; }
+  var btn = document.querySelector('#panelGeneral button:first-child');
+  if (btn) { btn.textContent = '⏳ 拉取中...'; btn.disabled = true; }
   cfKvApi('GET').then(function(resp) {
     if (resp.success && resp.result !== null) {
       var cloudStr = typeof resp.result === 'string' ? resp.result : JSON.stringify(resp.result);
-      // 跟上次拉取的对比，有变化就更新
-      if (cloudStr !== _lastCloudData) {
-        _lastCloudData = cloudStr;
-        var cloudData = typeof resp.result === 'string' ? JSON.parse(resp.result) : resp.result;
-        if (cloudData.sections && cloudData.quickLinks) {
-          var localStr = JSON.stringify(data);
-          if (cloudStr !== localStr) {
-            data = cloudData;
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-            render();
-          }
+      _lastCloudData = cloudStr;
+      var cloudData = typeof resp.result === 'string' ? JSON.parse(resp.result) : resp.result;
+      if (cloudData.sections && cloudData.quickLinks) {
+        var localStr = JSON.stringify(data);
+        if (cloudStr !== localStr) {
+          data = cloudData;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+          render();
+          showToast('✅ 已从云端拉取最新数据', 'success');
+        } else {
+          showToast('☁️ 云端数据与本地一致', 'info');
         }
       }
+    } else {
+      showToast('⚠️ 拉取失败，请检查Token', 'error');
     }
-  }).catch(function() {});
+  }).catch(function() {
+    showToast('⚠️ 网络异常，拉取失败', 'error');
+  }).finally(function() {
+    if (btn) { btn.textContent = '📥 从云拉取'; btn.disabled = false; }
+  });
 }
-setInterval(pollCloudSync, 30000);
-// 页面可见时立即同步一次
-document.addEventListener('visibilitychange', function() {
-  if (!document.hidden) setTimeout(pollCloudSync, 500);
-});
 
 // 主题切换
 function toggleTheme() {
